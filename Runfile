@@ -1,0 +1,14 @@
+require "runfile-tasks"
+require_relative 'lib/expected'
+
+title   "Expected Developer Toolbelt"
+summary "Runfile tasks for building the Expected gem"
+version Expected::VERSION
+
+RunfileTasks::RubyGems.all 'expected'
+RunfileTasks::Testing.rspec
+
+help   "Run interactive console"
+action :console, :c do
+  run "bundle exec bin/console"
+end
