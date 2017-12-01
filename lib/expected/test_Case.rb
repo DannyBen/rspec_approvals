@@ -1,5 +1,7 @@
 module Expected
   class TestCase
+    include Colors
+
     attr_reader :fixture_name, :actual
 
     def initialize(fixture_name, actual)
@@ -9,23 +11,21 @@ module Expected
     def result
       return true if actual == expected
 
-      puts "=== Approval Needed ===\n"
+      puts "%{blue}--- Approval Needed ---%{reset}\n" % colors
       if expected.empty?
         puts actual
       else
-        puts "--- Actual ------------\n#{actual}"
-        puts "--- Expected ----------\n#{expected}"
+        puts "--- New (Actual) ------%{reset}\n#{actual}" % colors
+        puts "--- Old (Fixture) -----%{reset}\n#{expected}" % colors
       end
-      puts "======================="
-      
-      print "Approve? (y/N): "
+      print "%{blue}--- Approve? (y/N): --> %{reset}" % colors
       
       if $stdin.getch == "y"
-        puts "Approved"
+        puts "%{green}Approved%{reset}" % colors
         File.write fixture_file, actual
         true
       else
-        puts "Not Approved"
+        puts "%{red}Not Approved%{reset}" % colors
         actual == expected
       end
     end
