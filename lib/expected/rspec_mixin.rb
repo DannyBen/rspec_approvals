@@ -6,7 +6,7 @@ module Expected
       end
 
       failure_message do |actual|
-        TestCase.new(expected, actual).message
+        TestCase.new(expected, actual).failure_message
       end
     end
   end

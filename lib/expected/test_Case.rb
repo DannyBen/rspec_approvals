@@ -30,7 +30,7 @@ module Expected
       end
     end
 
-    def message
+    def failure_message
       "expected #{expected.inspect}\nto match #{actual.inspect}"
     end
 
