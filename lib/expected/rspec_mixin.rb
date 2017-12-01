@@ -12,6 +12,8 @@ module Expected
   end
 end
 
-RSpec.configure do |config|
-  config.include Expected::RSpecMixin
+if defined? RSpec
+  RSpec.configure do |config|
+    config.include Expected::RSpecMixin
+  end
 end
