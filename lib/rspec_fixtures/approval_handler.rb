@@ -12,7 +12,7 @@ module RSpecFixtures
       end
       print "%{blue}--- Approve? (y/N): --> %{reset}" % colors
       
-      if get_user_answer == "y"
+      if user_approves?
         puts "%{green}Approved%{reset}" % colors
         File.write fixture_file, actual
         true
@@ -24,8 +24,8 @@ module RSpecFixtures
 
     private
 
-    def get_user_answer
-      $stdin.getch
+    def user_approves?
+      $stdin.getch == 'y'
     end
   end
 end
