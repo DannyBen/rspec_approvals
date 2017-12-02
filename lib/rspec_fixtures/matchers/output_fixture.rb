@@ -5,11 +5,8 @@ module RSpecFixtures
     end
     
     class OutputFixture < Base
-      attr_reader :stream_capturer
-
       def matches?(block)
         return false unless block.is_a? Proc
-        @stream_capturer ||= CaptureStdout
         @actual = stream_capturer.capture block
 
         if actual == expected or !interactive?
@@ -31,6 +28,10 @@ module RSpecFixtures
       def to_stderr
         @stream_capturer = CaptureStderr
         self
+      end
+
+      def stream_capturer
+        @stream_capturer ||= CaptureStdout
       end
 
     end
