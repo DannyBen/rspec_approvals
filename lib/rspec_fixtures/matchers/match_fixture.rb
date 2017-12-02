@@ -64,7 +64,7 @@ module RSpecFixtures
           true
         else
           puts "%{red}Not Approved%{reset}" % colors
-          actual == expected
+          false
         end
       end
 
