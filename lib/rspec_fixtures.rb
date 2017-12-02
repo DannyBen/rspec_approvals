@@ -1,5 +1,4 @@
 require 'rspec_fixtures/version'
-require 'rspec_fixtures/colors'
 
 require 'rspec_fixtures/stream_capturer'
 require 'rspec_fixtures/approval_handler'

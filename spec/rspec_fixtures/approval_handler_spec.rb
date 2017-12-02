@@ -10,7 +10,7 @@ describe ApprovalHandler do
   describe '#run' do
     context "when the user answers y(es)" do
       before do
-        expect(subject).to receive(:get_user_answer).and_return 'y'
+        expect(subject).to receive(:user_approves?).and_return true
       end
 
       it "writes actual result to fixture and reutrns true" do
@@ -23,7 +23,7 @@ describe ApprovalHandler do
 
     context "when the user answers n(o)" do
       before do
-        expect(subject).to receive(:get_user_answer).and_return 'n'
+        expect(subject).to receive(:user_approves?).and_return false
       end
 
       it "does not write to fixture and returns false" do

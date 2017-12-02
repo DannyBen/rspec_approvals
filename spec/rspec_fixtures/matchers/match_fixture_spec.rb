@@ -44,7 +44,7 @@ describe Matchers::MatchFixture do
 
         it "asks for approval and creates the fixture" do
           expect($stdin).to receive(:getch).and_return 'y'
-          expect{ subject.matches? 'no_such_fixture' }.to output(/Approval Needed/).to_stdout
+          expect{ subject.matches? 'no_such_fixture' }.to output(/Approve new fixture/).to_stdout
           expect(File).to exist(file)
         end
 
