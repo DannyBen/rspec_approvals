@@ -3,6 +3,11 @@ SimpleCov.start
 
 require 'rubygems'
 require 'bundler'
+require 'rspec_fixtures'
 Bundler.require :default, :development
 
-include Expected
+include RSpecFixtures
+
+RSpec.configure do |config|
+  config.interactive_fixtures = ENV['DEVMODE']
+end

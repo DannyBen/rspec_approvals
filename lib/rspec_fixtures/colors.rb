@@ -1,4 +1,4 @@
-module Expected
+module RSpecFixtures
   module Colors
     def colors
       @colors ||= {

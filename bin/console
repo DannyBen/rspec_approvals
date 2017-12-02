@@ -2,8 +2,8 @@
 
 require "irb"
 require "irb/completion" # easy tab completion
-require "expected"
+require "rspec_fixtures"
 
-include Expected
+include RSpecFixtures
 
 IRB.start

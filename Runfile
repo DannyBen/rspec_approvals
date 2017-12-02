@@ -1,11 +1,11 @@
 require "runfile-tasks"
-require_relative 'lib/expected'
+require_relative 'lib/rspec_fixtures'
 
-title   "Expected Developer Toolbelt"
-summary "Runfile tasks for building the Expected gem"
-version Expected::VERSION
+title   "RSpec Fixtures Developer Toolbelt"
+summary "Runfile tasks for building the RSpec Fixtures gem"
+version RSpecFixtures::VERSION
 
-RunfileTasks::RubyGems.all 'expected'
+RunfileTasks::RubyGems.all 'rspec_fixtures'
 RunfileTasks::Testing.rspec
 
 help   "Run interactive console"
