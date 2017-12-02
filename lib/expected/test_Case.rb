@@ -2,10 +2,10 @@ module Expected
   class TestCase
     include Colors
 
-    attr_reader :fixture_name, :actual
+    attr_reader :fixture_name, :actual, :output
 
-    def initialize(fixture_name, actual)
-      @fixture_name, @actual = fixture_name, actual
+    def initialize(fixture_name, actual, output: false)
+      @fixture_name, @actual, @output = fixture_name, actual, output
     end
 
     def result
