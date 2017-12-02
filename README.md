@@ -56,8 +56,22 @@ Matchers
 
 ### `match_fixture`
 
+Compare a string with a pre-approved fixture.
+
 ```ruby
 expect('some string').to match_fixture('fixture_filename')
+```
+
+### `output_fixture`
+
+Compare an output (stdout or stderr) with a pre-approved fixture.
+
+```ruby
+expect{ puts "hello" }.to output_fixture('fixture_filename')
+expect{ puts "hello" }.to output_fixture('fixture_filename').to_stdout
+expect{ $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
+
+# The first two are the same, as the default stream is stdout.
 ```
 
 
