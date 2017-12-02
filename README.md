@@ -76,7 +76,7 @@ RSpec.configure do |config|
 end
 ```
 
-### `fixtures_oath`
+### `fixtures_path`
 
 By default, fixtures are stored in `spec/fixtures`. To change the path,
 add this to your `spec_helper`.
