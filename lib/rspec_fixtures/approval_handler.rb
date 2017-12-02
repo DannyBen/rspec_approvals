@@ -1,23 +1,31 @@
+require 'colsole'
+
 module RSpecFixtures
   class ApprovalHandler
-    include Colors
+    include Colsole
 
     def run(expected, actual, fixture_file)
-      puts "%{blue}--- Approval Needed ---%{reset}\n" % colors
+      line = '_' * terminal_width
+
+      say "!txtgrn!#{line}"
       if expected.empty?
-        puts actual
+        say actual
       else
-        puts "--- New (Actual) ------%{reset}\n#{actual}" % colors
-        puts "--- Old (Fixture) -----%{reset}\n#{expected}" % colors
+        say "> New (Actual):"
+        say actual
+        say "!txtpur!#{line}"
+        say "> Old (Fixture):"
+        say expected
       end
-      print "%{blue}--- Approve? (y/N): --> %{reset}" % colors
+      say "!txtgrn!#{line}"
+      say "> Approve new fixture? (y/N): "
       
       if user_approves?
-        puts "%{green}Approved%{reset}" % colors
+        say "!txtgrn!Approved"
         File.write fixture_file, actual
         true
       else
-        puts "%{red}Not Approved%{reset}" % colors
+        say "!txtred!Not Approved"
         false
       end
     end
