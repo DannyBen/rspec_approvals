@@ -27,7 +27,7 @@ module RSpecFixtures
       end
 
       def failure_message
-        "expected #{expected}\nto match #{actual}"
+        "expected #{actual}\nto match #{expected}"
       end
 
       def diffable?
