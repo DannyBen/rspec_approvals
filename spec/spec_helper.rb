@@ -10,6 +10,14 @@ include RSpecFixtures
 
 RSpec.configure do |config|
   config.interactive_fixtures = ENV['DEVMODE']
+  
+  # Cleanup some fixutures, for good housekeeping
+  config.after :suite do 
+    ['no_such_fixture', 'create_me_please'].each do |name|
+      file = "spec/fixtures/#{name}"
+      File.delete file if File.exist? file
+    end
+  end
 end
 
 def supress_output

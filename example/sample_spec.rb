@@ -1,10 +1,10 @@
 require 'rspec'
 require 'rspec_fixtures'
 
-describe 'something' do
+describe 'output_fixture' do
   subject { puts "hello world" }
 
-  it "should work" do
-    expect{ subject }.to output_fixture("command")
+  it "works" do
+    expect{ subject }.to output_fixture("tmp/sample")
   end
 end
