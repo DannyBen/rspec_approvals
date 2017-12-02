@@ -23,18 +23,6 @@ describe Matchers::MatchFixture do
   end
 
   describe '#matches?' do
-    context "when actual == expected" do
-      it "returns true" do
-        expect(subject.matches? 'something').to be true
-      end
-    end
-
-    context "when actual != expected" do
-      it "returns false" do
-        expect(subject.matches? 'something else').to be false
-      end
-    end
-
     context "when interactive mode is enabled" do
       subject { Matchers::MatchFixture.new 'no_such_fixture' }
 
@@ -60,48 +48,8 @@ describe Matchers::MatchFixture do
           expect(File).to exist(file)
         end
 
-        it "asks for approval and returns true" do
-          expect($stdin).to receive(:getch).and_return 'y'
-          supress_output do
-            expect(subject.matches? 'no_such_fixture').to be true
-          end
-          expect(File).to exist(file)
-        end
-      end
-
-      context "when fixture file exists but wrong" do
-        let(:file) { 'spec/fixtures/apples' }
-        subject { Matchers::MatchFixture.new 'apples' }
-
-        before do
-          File.write file, 'apples'
-        end
-
-        it "asks for approval and updates the fixture" do
-          expect($stdin).to receive(:getch).and_return 'y'
-          supress_output do
-            expect(subject.matches? 'oranges').to be true
-          end
-          expect(File.read file).to eq 'oranges'
-        end
-      end
-
-      context "when rejecting approval" do
-        let(:file) { 'spec/fixtures/no_such_fixture' }
-        subject { Matchers::MatchFixture.new 'no_such_fixture' }
-
-        before do
-          File.delete file if File.exist? file
-          expect(File).not_to exist(file)
-        end
-
-        it "fails the test" do
-          expect($stdin).to receive(:getch).and_return 'n'
-          supress_output do
-            expect(subject.matches? 'anything').to be false
-          end
-        end
       end
     end
   end
+
 end
