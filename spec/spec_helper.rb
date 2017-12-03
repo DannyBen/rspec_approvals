@@ -13,7 +13,7 @@ RSpec.configure do |config|
   
   # Cleanup some fixutures, for good housekeeping
   config.after :suite do 
-    ['no_such_fixture', 'create_me_please'].each do |name|
+    ['command', 'no_such_fixture', 'create_me_please'].each do |name|
       file = "spec/fixtures/#{name}"
       File.delete file if File.exist? file
     end
