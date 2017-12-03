@@ -45,9 +45,7 @@ module RSpecFixtures
       end
 
       def expected!
-        Dir.mkdir fixtures_dir unless Dir.exist? fixtures_dir
-        File.write fixture_file, nil unless File.exist? fixture_file
-        File.read fixture_file
+        File.exist?(fixture_file) ? File.read(fixture_file) : ''
       end
     end
 

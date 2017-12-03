@@ -18,7 +18,16 @@ describe ApprovalHandler do
           expect(subject.run 'expected', 'actual', fixture).to be true
         end
         expect(File.read fixture).to eq 'actual'
-      end      
+      end
+
+      context "when the fixture folders do not exist" do
+        it "creates them using deep_write" do
+          expect(File).to receive(:deep_write).with('some/deep/path', 'actual')
+          supress_output do
+            subject.run 'expected', 'actual', 'some/deep/path'
+          end
+        end
+      end
     end
 
     context "when the user answers n(o)" do
