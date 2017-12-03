@@ -24,20 +24,6 @@ describe Matchers::Base do
     it "loads fixture content from a file" do
       expect(subject.expected).to eq File.read('spec/fixtures/something')
     end
-
-    context "when the fixture file is not present" do
-      subject { Matchers::Base.new 'create_me_please' }
-      let(:file) { 'spec/fixtures/create_me_please' }
-      before do 
-        File.delete file if File.exist? file
-        expect(File).not_to exist file
-      end
-
-      it "creates it" do
-        subject.expected
-        expect(File).to exist file
-      end
-    end
   end
 
   describe '#failure_message' do

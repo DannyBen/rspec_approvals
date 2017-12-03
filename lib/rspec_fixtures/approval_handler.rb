@@ -22,7 +22,7 @@ module RSpecFixtures
       
       if user_approves?
         say "!txtgrn!Approved"
-        File.write fixture_file, actual
+        File.deep_write fixture_file, actual
         true
       else
         say "!txtred!Not Approved"
