@@ -1,4 +1,5 @@
 require 'colsole'
+require 'io/console'
 
 module RSpecFixtures
   class ApprovalHandler
@@ -33,9 +34,7 @@ module RSpecFixtures
     private
 
     def user_approves?
-      # NOTE: getc does not work, therefore using gets
-      #       See: https://stackoverflow.com/questions/48459605/ruby-2-5-0-stdin-getc-does-not-work-on-consecutive-calls
-      $stdin.gets =~ /^[Yy]/
+      $stdin.getch =~ /[Yy]/
     end
   end
 end
