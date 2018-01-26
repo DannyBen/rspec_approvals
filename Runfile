@@ -12,3 +12,8 @@ help   "Run interactive console"
 action :console, :c do
   run "bundle exec bin/console"
 end
+
+help   "Run the interactive example spec"
+action :example do
+  run "bundle exec rspec example"
+end

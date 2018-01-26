@@ -33,7 +33,9 @@ module RSpecFixtures
     private
 
     def user_approves?
-      $stdin.getch == 'y'
+      # NOTE: getc does not work, therefore using gets
+      #       See: https://stackoverflow.com/questions/48459605/ruby-2-5-0-stdin-getc-does-not-work-on-consecutive-calls
+      $stdin.gets =~ /^[Yy]/
     end
   end
 end
