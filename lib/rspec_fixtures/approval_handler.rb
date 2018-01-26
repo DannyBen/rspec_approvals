@@ -33,7 +33,7 @@ module RSpecFixtures
     private
 
     def user_approves?
-      $stdin.getch == 'y'
+      $stdin.getc == 'y'
     end
   end
 end
