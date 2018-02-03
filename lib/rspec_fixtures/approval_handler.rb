@@ -12,11 +12,11 @@ module RSpecFixtures
       if expected.empty?
         say actual
       else
-        say "> New (Actual):"
-        say actual
-        say "!txtpur!#{line}"
         say "> Old (Fixture):"
         say expected
+        say "!txtpur!#{line}"
+        say "> New (Actual):"
+        say actual
       end
       say "!txtgrn!#{line}"
       say "> Approve new fixture? (y/N): "
