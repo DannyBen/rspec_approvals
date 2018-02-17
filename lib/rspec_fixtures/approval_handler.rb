@@ -2,6 +2,8 @@ require 'colsole'
 require 'io/console'
 
 module RSpecFixtures
+
+  # Handles user input and interactive fixture approvals
   class ApprovalHandler
     include Colsole
 

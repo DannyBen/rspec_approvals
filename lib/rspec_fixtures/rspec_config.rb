@@ -1,3 +1,4 @@
+# Add our custom matchers and configuration options to RSpec
 if defined? RSpec
   RSpec.configure do |config|
     config.include RSpecFixtures::Matchers
