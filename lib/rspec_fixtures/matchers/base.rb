@@ -2,7 +2,7 @@ module RSpecFixtures
   module Matchers
 
     class Base
-      attr_reader :fixture_name, :actual
+      attr_reader :fixture_name, :actual, :distance
 
       def initialize(fixture_name=nil)
         @fixture_name = fixture_name
@@ -11,6 +11,11 @@ module RSpecFixtures
       def matches?(actual)
         @actual = actual
         false
+      end
+
+      def diff(distance)
+        @distance = distance
+        self
       end
 
       def expected
