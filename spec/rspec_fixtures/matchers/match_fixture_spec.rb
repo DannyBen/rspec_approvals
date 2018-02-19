@@ -18,7 +18,7 @@ describe Matchers::MatchFixture do
   describe '#failure_message' do
     it "returns a formatted string" do
       subject.matches? 'something else'
-      expect(subject.failure_message).to eq "expected something else\nto match something"
+      expect(subject.failure_message).to eq "expected: something else\nto match: something"
     end
   end
 

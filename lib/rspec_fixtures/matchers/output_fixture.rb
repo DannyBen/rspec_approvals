@@ -11,20 +11,7 @@ module RSpecFixtures
       def matches?(block)
         return false unless block.is_a? Proc
         @actual = stream_capturer.capture block
-
-        # TODO: Organize this mess (its the same as in MatchFixture)
-        if distance
-          actual_distance = String::Similarity.levenshtein_distance expected, actual
-          success = actual_distance <= distance
-        else
-          success = actual == expected
-        end
-
-        if success or !interactive?
-          success
-        else
-          approve_fixture
-        end
+        super
       end
 
       # Lets RSpec know that this matcher requires a block.

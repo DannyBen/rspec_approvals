@@ -10,8 +10,12 @@ describe Matchers::Base do
   end
 
   describe '#matches?' do
-    it "returns false unless overridden" do
-      expect(subject.matches? 'something').to be false
+    it "returns true when actual matches expected" do
+      expect(subject.matches? 'something').to be true
+    end
+    
+    it "returns false when actual does not match expected" do
+      expect(subject.matches? 'something else').to be false
     end
 
     it "sets @actual" do
@@ -29,7 +33,7 @@ describe Matchers::Base do
   describe '#failure_message' do
     it "returns a formatted string" do
       subject.matches? 'something else'
-      expect(subject.failure_message).to eq "expected something else\nto match something"
+      expect(subject.failure_message).to eq "expected: something else\nto match: something"
     end
   end
 

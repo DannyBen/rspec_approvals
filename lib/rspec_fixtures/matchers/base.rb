@@ -3,7 +3,7 @@ module RSpecFixtures
 
     # A base matcher for fixture approvals
     class Base
-      attr_reader :fixture_name, :actual, :distance
+      attr_reader :fixture_name, :actual, :distance, :actual_distance
 
       def initialize(fixture_name=nil)
         @fixture_name = fixture_name
@@ -11,8 +11,15 @@ module RSpecFixtures
 
       # Called by RSpec. This will be overridden by child matchers.
       def matches?(actual)
-        @actual = actual
-        false
+        @actual ||= actual
+
+        success = strings_match?
+
+        if success or !interactive?
+          success
+        else
+          approve_fixture
+        end
       end
 
       # Provides a chained matcher to do something like:
@@ -30,7 +37,13 @@ module RSpecFixtures
 
       # Called by RSpec when there is a failure
       def failure_message
-        "expected #{actual}\nto match #{expected}"
+        result = "expected: #{actual}\nto match: #{expected}"
+        
+        if distance
+          result = "#{result}\n(actual distance is #{actual_distance} instead of the expected #{distance})"
+        end
+
+        result
       end
 
       # Lets RSpec know these matchers support diffing
@@ -68,6 +81,18 @@ module RSpecFixtures
       def expected!
         File.exist?(fixture_file) ? File.read(fixture_file) : ''
       end
+
+      # Do the actual test. If .diff() was used, then distance will be 
+      # set and then we "levenshtein it". Otherwise, compare with ==
+      def strings_match?
+        if distance
+          @actual_distance = String::Similarity.levenshtein_distance expected, actual
+          @actual_distance <= distance
+        else
+          actual == expected
+        end
+      end
+
     end
 
   end
