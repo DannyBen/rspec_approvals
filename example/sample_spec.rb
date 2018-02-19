@@ -52,7 +52,7 @@ describe 'output_fixture' do
     expect{ subject }.to output_fixture("output_fixture")
   end
 
-  context "with diff", :focus do
+  context "with diff" do
     subject { puts "this fixture is a DIFFERENT output" }
 
     it "works, despite the string being a little different" do
