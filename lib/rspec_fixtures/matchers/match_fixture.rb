@@ -9,11 +9,6 @@ module RSpecFixtures
     end
     
     class MatchFixture < Base
-      # Called by RSpec
-      def matches?(actual)
-        @actual = actual
-        super
-      end
     end
     
   end

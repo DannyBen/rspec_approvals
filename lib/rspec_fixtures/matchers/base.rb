@@ -77,7 +77,7 @@ module RSpecFixtures
         approval_handler.run expected, actual, fixture_file
       end
 
-      # Return the actual fixture file content.
+      # Returns the actual fixture file content.
       def expected!
         File.exist?(fixture_file) ? File.read(fixture_file) : ''
       end
