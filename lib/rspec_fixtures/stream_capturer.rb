@@ -1,4 +1,6 @@
 module RSpecFixtures
+  # Capture stdout and stderr
+  #
   # These methods are borrowed from rspec's built in matchers
   # https://github.com/rspec/rspec-expectations/blob/add9b271ecb1d65f7da5bc8a9dd8c64d81d92303/lib/rspec/matchers/built_in/output.rb
   module CaptureStdout

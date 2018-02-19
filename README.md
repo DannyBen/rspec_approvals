@@ -17,6 +17,7 @@ content.
 ---
 
 
+
 Install
 --------------------------------------------------
 
@@ -29,6 +30,7 @@ Or with bundler:
 ```ruby
 gem 'rspec_fixtures'
 ```
+
 
 
 Usage
@@ -51,10 +53,12 @@ describe 'ls' do
 end
 ```
 
+
+
 Matchers
 --------------------------------------------------
 
-### `match_fixture`
+### `match_fixture` - Compare Strings
 
 Compare a string with a pre-approved fixture.
 
@@ -62,7 +66,8 @@ Compare a string with a pre-approved fixture.
 expect('some string').to match_fixture('fixture_filename')
 ```
 
-### `output_fixture`
+
+### `output_fixture` - Compare STDOUT/STDERR
 
 Compare an output (stdout or stderr) with a pre-approved fixture.
 
@@ -73,6 +78,24 @@ expect{ $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
 
 # The first two are the same, as the default stream is stdout.
 ```
+
+
+### `diff` - String Similarity
+
+Adding `diff(distance)` to either `match_fixture` or `output_fixture` will
+change the matching behavior. Instead of expecting the strings to be exactly
+the same, using `diff` compares the strings using the Levenshtein text 
+similarity algorithm.
+
+In the below example, we allow up to 5 characters to be different.
+
+```ruby
+expect('some string').to match_fixture('fixture_filename').diff(5)
+expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
+```
+
+Distance is measured using the Levenshtein algorithm.
+
 
 
 Configuration
@@ -90,6 +113,7 @@ RSpec.configure do |config|
 end
 ```
 
+
 ### `fixtures_path`
 
 By default, fixtures are stored in `spec/fixtures`. To change the path,
@@ -100,3 +124,4 @@ RSpec.configure do |config|
   config.fixtures_path = 'spec/anywhere/else'
 end
 ```
+

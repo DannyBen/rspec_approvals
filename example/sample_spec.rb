@@ -35,6 +35,14 @@ describe 'match_fixture' do
   it "works" do
     expect(subject).to match_fixture("match_fixture")
   end
+
+  context "with diff" do
+    subject { "this fixture is a ALMOST A match" }
+
+    it "works, despite the string being a little different" do
+      expect(subject).to match_fixture("match_fixture").diff(9)
+    end
+  end
 end
 
 describe 'output_fixture' do
@@ -42,5 +50,13 @@ describe 'output_fixture' do
 
   it "works" do
     expect{ subject }.to output_fixture("output_fixture")
+  end
+
+  context "with diff" do
+    subject { puts "this fixture is a DIFFERENT output" }
+
+    it "works, despite the string being a little different" do
+      expect{ subject }.to output_fixture("output_fixture").diff(10)
+    end
   end
 end
