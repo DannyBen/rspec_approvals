@@ -84,8 +84,8 @@ expect{ $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
 
 Adding `diff(distance)` to either `match_fixture` or `output_fixture` will
 change the matching behavior. Instead of expecting the strings to be exactly
-the same, using `diff` compares the strings using the Levenshtein text 
-similarity algorithm.
+the same, using `diff` compares the strings using the 
+[Levenshtein distance][1] algorithm.
 
 In the below example, we allow up to 5 characters to be different.
 
@@ -93,8 +93,6 @@ In the below example, we allow up to 5 characters to be different.
 expect('some string').to match_fixture('fixture_filename').diff(5)
 expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ```
-
-Distance is measured using the Levenshtein algorithm.
 
 
 
@@ -125,3 +123,5 @@ RSpec.configure do |config|
 end
 ```
 
+
+[1]: https://en.wikipedia.org/wiki/Levenshtein_distance
