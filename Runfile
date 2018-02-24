@@ -1,5 +1,6 @@
 require "runfile-tasks"
 require_relative 'lib/rspec_fixtures'
+require_relative 'lib/rspec_fixtures/version'
 
 title   "RSpec Fixtures Developer Toolbelt"
 summary "Runfile tasks for building the RSpec Fixtures gem"
