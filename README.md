@@ -1,10 +1,10 @@
 RSpec Fixtures
 ==================================================
 
-[![Gem](https://img.shields.io/gem/v/rspec_fixtures.svg?style=flat-square)](https://rubygems.org/gems/rspec_fixtures)
-[![Travis](https://img.shields.io/travis/DannyBen/rspec_fixtures.svg?style=flat-square)](https://travis-ci.org/DannyBen/rspec_fixtures)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/DannyBen/rspec_fixtures.svg?style=flat-square)](https://codeclimate.com/github/DannyBen/rspec_fixtures)
-[![Dependencies](https://img.shields.io/gemnasium/DannyBen/rspec_fixtures.svg?style=flat-square)](https://gemnasium.com/DannyBen/rspec_fixtures)
+[![Gem Version](https://badge.fury.io/rb/rspec_fixtures.svg)](https://badge.fury.io/rb/rspec_fixtures)
+[![Build Status](https://travis-ci.org/DannyBen/rspec_fixtures.svg?branch=master)](https://travis-ci.org/DannyBen/rspec_fixtures)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a06ed5e30412062c454c/maintainability)](https://codeclimate.com/github/DannyBen/rspec_fixtures/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a06ed5e30412062c454c/test_coverage)](https://codeclimate.com/github/DannyBen/rspec_fixtures/test_coverage)
 
 ---
 
