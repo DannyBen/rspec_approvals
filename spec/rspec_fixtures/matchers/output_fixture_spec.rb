@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Matchers::OutputFixture do
   subject { Matchers::OutputFixture.new 'something' }
 
-  describe '::match_fixture' do
+  describe '::output_fixture' do
     it "works" do
       expect{ print 'anything' }.to output_fixture('anything')
     end
