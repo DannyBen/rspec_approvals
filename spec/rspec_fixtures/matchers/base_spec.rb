@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Matchers::Base do
-  subject { Matchers::Base.new 'something' }
+  subject { described_class.new 'something' }
 
   describe '#diffable?' do
     it "is true" do
@@ -24,6 +24,16 @@ describe Matchers::Base do
     context "when actual does not match expected" do
       it "returns false" do
         expect(subject.matches? 'something else').to be false
+      end
+    end
+
+    context "when the fixture file does not exist" do
+      subject { described_class.new 'no-such-fixture' }
+      
+      context "when actual is empty" do
+        it "returns false" do
+          expect(subject.matches? '').to be false
+        end
       end
     end
 
@@ -64,6 +74,15 @@ describe Matchers::Base do
         subject.matches? 'something else'
         expect(subject.failure_message).to eq "expected: something else\nto match: something\n(actual distance is 5 instead of the expected 2)"
       end      
+    end
+
+    context "when the actual string is empty" do
+      subject { described_class.new 'no-such-fixture' }
+
+      it "returns a proper message" do
+        subject.matches? ''
+        expect(subject.failure_message).to eq "actual string is empty"
+      end
     end
   end
 

@@ -12,6 +12,7 @@ module RSpecFixtures
       # Called by RSpec. This will be overridden by child matchers.
       def matches?(actual)
         @actual ||= actual
+        return false if @actual.empty?
 
         success = strings_match?
 
@@ -37,6 +38,8 @@ module RSpecFixtures
 
       # Called by RSpec when there is a failure
       def failure_message
+        return "actual string is empty" if actual.empty?
+
         result = "expected: #{actual}\nto match: #{expected}"
         
         if distance
