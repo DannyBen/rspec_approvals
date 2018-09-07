@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'colsole', '~> 0.5'
   s.add_runtime_dependency 'string-similarity', '~> 2.0'
+  s.add_runtime_dependency 'diffy', '~> 3.2'
+  s.add_runtime_dependency 'tty-prompt', '~> 0.17'
 
   s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'runfile', '~> 0.9'
