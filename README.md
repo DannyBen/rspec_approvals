@@ -9,7 +9,10 @@ RSpec Fixtures
 ---
 
 RSpec Fixtures allows you to interactively review and approve testable
-content.
+content. 
+
+This is a *"What You See is What You Test"* for your specs, because 
+*a Fixture is worth a thousand Mocks*... (too much?...)
 
 ![demo](demo.gif)
 
