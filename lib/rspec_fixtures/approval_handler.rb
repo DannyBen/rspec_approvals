@@ -23,32 +23,25 @@ module RSpecFixtures
     private
 
     def prompt_user
-      response = prompt.select "Please Choose:", menu_options, marker: '>'
+      response = get_response
 
       case response
-      when :approve
-        approve
-      
-      when :reject
-        reject
-      
-      when :actual
-        show actual
-        prompt_user
-      
-      when :expected
-        show expected
+
+      when :approve, :reject
+        send response
+
+      when :actual, :expected, :diff
+        show send response
         prompt_user
 
-      when :diff
-        show diff
-        prompt_user
-
-      
       else
         false
-      
+
       end
+    end
+
+    def get_response
+      prompt.select "Please Choose:", menu_options, marker: '>'
     end
 
     def menu_options
