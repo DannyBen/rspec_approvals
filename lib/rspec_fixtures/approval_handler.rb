@@ -42,6 +42,10 @@ module RSpecFixtures
 
     def get_response
       prompt.select "Please Choose:", menu_options, marker: '>'
+    rescue TTY::Reader::InputInterrupt
+      # :nocov:
+      return :reject
+      # :nocov:
     end
 
     def menu_options

@@ -11,7 +11,7 @@ RSpec Fixtures
 RSpec Fixtures allows you to interactively review and approve testable
 content.
 
-[![asciicast](https://asciinema.org/a/150733.png)](https://asciinema.org/a/150733)
+![demo](demo.gif)
 
 ---
 
