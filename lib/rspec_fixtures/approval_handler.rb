@@ -79,7 +79,7 @@ module RSpecFixtures
     end
 
     def diff
-      Diffy::Diff.new(expected, actual).to_s :color
+      Diffy::Diff.new(expected, actual, context: 2).to_s :color
     end
 
     def show(what)
