@@ -18,13 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'colsole', '~> 0.5'
   s.add_runtime_dependency 'string-similarity', '~> 2.0'
-  s.add_runtime_dependency 'diffy', '~> 3.2'
-  s.add_runtime_dependency 'tty-prompt', '~> 0.17'
-
-  s.add_development_dependency 'rspec', '~> 3.7'
-  s.add_development_dependency 'runfile', '~> 0.9'
-  s.add_development_dependency 'runfile-tasks', '~> 0.4'
-  s.add_development_dependency 'byebug', '~> 9.0'
-  s.add_development_dependency 'simplecov', '~> 0.14'
-  s.add_development_dependency 'yard', '~> 0.9'
+  s.add_runtime_dependency 'diffy', '~> 3.3'
+  s.add_runtime_dependency 'tty-prompt', '~> 0.18'
 end
