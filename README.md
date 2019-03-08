@@ -82,7 +82,10 @@ expect{ $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
 ```
 
 
-### `diff` - String Similarity
+Modifiers
+--------------------------------------------------
+
+### `diff` - String similarity
 
 Adding `diff(distance)` to either `match_fixture` or `output_fixture` will
 change the matching behavior. Instead of expecting the strings to be exactly
@@ -96,6 +99,36 @@ expect('some string').to match_fixture('fixture_filename').diff(5)
 expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ```
 
+
+### `except` - Exclude by regular expression
+
+Adding `except(regex)` to either `match_fixture` or `output_fixture` will
+modify the string under test before runnign. The supplied regular expression
+must include exactly one capture group, which will be then replaced by '...'.
+
+In the below example, we ignore the full path of the file.
+
+```ruby
+expect('path: /path/to/file').to match_fixture('fixture_filename').except(/path: (.*)file/)
+```
+
+### `before` - Alter the string before testing
+
+The `before(proc)` method is a low level method and should normally not be 
+used directly (as it is used by the `except` modifier).
+
+Adding `before(proc)` to either `match_fixture` or `output_fixture` will
+call the block and supply the actual string. The proc is expected to return
+the new actual string.
+
+In the below example, we replace all email addresses in a string.
+
+```ruby
+expect('hello rspec@fixtures.com').to match_fixture('fixture_filename').before ->(actual) do
+  actual.gsub /\w+@\w+\.\w+/, 'some@email.com'
+end
+
+```
 
 
 Configuration

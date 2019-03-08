@@ -37,7 +37,7 @@ describe Matchers::Base do
       end
     end
 
-    context "when using levenshtein" do
+    context "with .diff" do
       before do
         subject.diff 5
       end
@@ -54,6 +54,45 @@ describe Matchers::Base do
         end
       end
     end
+
+    context "with .except" do
+      subject { described_class.new 'except' }
+
+      before do
+        subject.except /path: (.*)file.rb/
+      end
+
+      context "when the strings are similar" do
+        it "returns true" do
+          expect(subject.matches? 'path: /mis/matched/file.rb').to be true
+        end
+      end
+
+      context "when the strings are not similar" do
+        it "returns false" do
+          expect(subject.matches? 'path: /mis/matched/folder').to be false
+        end
+      end
+    end
+
+    context "with .before" do
+      before do
+        subject.before ->(actual) { actual.sub 'any', 'some' }
+      end
+
+      context "when the strings are similar" do
+        it "returns true" do
+          expect(subject.matches? 'anything').to be true
+        end
+      end
+
+      context "when the strings are not similar" do
+        it "returns false" do
+          expect(subject.matches? 'nothing').to be false
+        end
+      end
+    end
+
   end
 
   describe '#expected' do

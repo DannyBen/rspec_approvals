@@ -31,6 +31,25 @@ module RSpecFixtures
         self
       end
 
+      def except(regex)
+        before ->(str) do
+          begin
+            str[regex, 1] = '...'
+          rescue IndexError
+          end
+          str
+        end
+      end
+
+      # Provides a chained matcher to adjust the actual string before
+      # checking for matches:
+      # `expect(a).to match_fixture(f).before ->(actual) { actual.gsub /one/, 'two' }`
+      def before(proc)
+        @before ||= []
+        @before << proc
+        self
+      end
+
       # Returns the expected value, from a fixture file
       def expected
         @expected ||= expected!
@@ -85,9 +104,19 @@ module RSpecFixtures
         File.exist?(fixture_file) ? File.read(fixture_file) : ''
       end
 
-      # Do the actual test. If .diff() was used, then distance will be 
-      # set and then we "levenshtein it". Otherwise, compare with ==
+      # Do the actual test. 
+      # - If .before() was used, we foreard the actual output to the
+      #   proc for processing first.
+      # - If .diff() was used, then distance will be set and then 
+      #   we "levenshtein it". 
+      # - Otherwise, compare with ==
       def strings_match?
+        if @before
+          @before.each do |proc|
+            @actual = proc.call actual 
+          end
+        end
+
         if distance
           @actual_distance = String::Similarity.levenshtein_distance expected, actual
           @actual_distance <= distance
