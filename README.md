@@ -102,7 +102,7 @@ expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ### `except` - Exclude by regular expression
 
 Adding `except(regex)` to either `match_fixture` or `output_fixture` will
-modify the string under test before runnign. The supplied regular expression
+modify the string under test before running. The supplied regular expression
 must include exactly one capture group, which will be then replaced by '...'.
 
 In the below example, we ignore the full path of the file.
