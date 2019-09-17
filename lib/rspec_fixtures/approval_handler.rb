@@ -23,7 +23,7 @@ module RSpecFixtures
     private
 
     def prompt_user
-      response = get_response
+      response = auto_approve? ? :approve : get_response
 
       case response
 
@@ -38,6 +38,10 @@ module RSpecFixtures
         false
 
       end
+    end
+
+    def auto_approve?
+      RSpec.configuration.auto_approve
     end
 
     def get_response

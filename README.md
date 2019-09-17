@@ -158,4 +158,25 @@ end
 ```
 
 
+### `auto_approve`
+
+If you wish to automatically approvoe all new or changed fixtures, you can
+set the `auto_approve` configuration option to `true`. By default, 
+auto approval is enabled if the environment variable `AUTO_APPROVE` is set.
+
+```ruby
+RSpec.configure do |config|
+  config.auto_approve = true # or any logic
+end
+```
+
+This feature is intended to help clean up the fixtures folder from old, no
+longer used files. Simply run the specs once, to ensure they all oass, 
+delete the fixtures folder, and run the specs again with:
+
+```
+$ AUTO_APPROVE=1 rspec
+```
+
+
 [1]: https://en.wikipedia.org/wiki/Levenshtein_distance
