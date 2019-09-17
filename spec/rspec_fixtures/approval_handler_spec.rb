@@ -12,7 +12,7 @@ describe ApprovalHandler do
       before { File.delete fixture if File.exist? fixture }
 
       it "only asks the user to Approve or Reject" do
-        # Check that evern after going down twice, we still remain at Approve
+        # Check that even after going down twice, we still remain at Approve
         stdin_send down_arrow, down_arrow, "\n" do
           expect{ subject.run 'expected', 'actual', fixture }.to output(/Approved/).to_stdout
         end
@@ -60,6 +60,19 @@ describe ApprovalHandler do
           end
           expect(File).not_to exist fixture
         end      
+      end
+
+      context "when auto_approve is configured to true" do
+        before { RSpec.configuration.auto_approve = true }
+        after  { RSpec.configuration.auto_approve = false }
+
+        it "does not prompt the user for approval" do
+          expect(subject).not_to receive(:get_response)
+          supress_output do
+            expect(subject.run 'expected', 'actual', fixture).to be true
+          end
+          expect(File.read fixture).to eq 'actual'
+        end
       end
 
     end

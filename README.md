@@ -102,7 +102,7 @@ expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ### `except` - Exclude by regular expression
 
 Adding `except(regex)` to either `match_fixture` or `output_fixture` will
-modify the string under test before runnign. The supplied regular expression
+modify the string under test before running. The supplied regular expression
 must include exactly one capture group, which will be then replaced by '...'.
 
 In the below example, we ignore the full path of the file.
@@ -155,6 +155,27 @@ add this to your `spec_helper`.
 RSpec.configure do |config|
   config.fixtures_path = 'spec/anywhere/else'
 end
+```
+
+
+### `auto_approve`
+
+If you wish to automatically approve all new or changed fixtures, you can
+set the `auto_approve` configuration option to `true`. By default, 
+auto approval is enabled if the environment variable `AUTO_APPROVE` is set.
+
+```ruby
+RSpec.configure do |config|
+  config.auto_approve = true # or any logic
+end
+```
+
+This feature is intended to help clean up the fixtures folder from old, no
+longer used files. Simply run the specs once, to ensure they all oass, 
+delete the fixtures folder, and run the specs again with:
+
+```
+$ AUTO_APPROVE=1 rspec
 ```
 
 
