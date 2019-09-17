@@ -62,7 +62,7 @@ describe ApprovalHandler do
         end      
       end
 
-      context "when auto_approve is configured to true", :focus do
+      context "when auto_approve is configured to true" do
         before { RSpec.configuration.auto_approve = true }
         after  { RSpec.configuration.auto_approve = false }
 

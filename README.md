@@ -160,7 +160,7 @@ end
 
 ### `auto_approve`
 
-If you wish to automatically approvoe all new or changed fixtures, you can
+If you wish to automatically approve all new or changed fixtures, you can
 set the `auto_approve` configuration option to `true`. By default, 
 auto approval is enabled if the environment variable `AUTO_APPROVE` is set.
 
