@@ -13,11 +13,5 @@ describe Matchers::RaiseFixture do
         expect{ puts "not raising" }.to raise_fixture('nothing-raised')
       end
     end
-
-    context "when an error type is given" do
-      it "works" do
-        expect{ raise ArgumentError, "arrrrggg" }.to raise_fixture(ArgumentError, 'arg-error')
-      end
-    end
   end
 end
