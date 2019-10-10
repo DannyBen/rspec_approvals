@@ -10,8 +10,6 @@ describe Matchers::OutputFixture do
   end
 
   describe '#matches?' do
-    subject { Matchers::OutputFixture.new 'something' }
-
     context "when interactive mode is enabled" do
       before :all do 
         RSpec.configuration.interactive_fixtures = true
