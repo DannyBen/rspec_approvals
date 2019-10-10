@@ -1,7 +1,7 @@
 module RSpecFixtures
   module Matchers
     # Adds the matcher to RSpec:
-    # `expect{ stream }.to output_fixture(file)`
+    # `expect { stream }.to output_fixture(file)`
     def output_fixture(expected)
       OutputFixture.new expected
     end
