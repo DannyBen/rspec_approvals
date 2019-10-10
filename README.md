@@ -73,12 +73,22 @@ expect('some string').to match_fixture('fixture_filename')
 Compare an output (stdout or stderr) with a pre-approved fixture.
 
 ```ruby
-expect{ puts "hello" }.to output_fixture('fixture_filename')
-expect{ puts "hello" }.to output_fixture('fixture_filename').to_stdout
-expect{ $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
+expect { puts "hello" }.to output_fixture('fixture_filename')
+expect { puts "hello" }.to output_fixture('fixture_filename').to_stdout
+expect { $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
 
 # The first two are the same, as the default stream is stdout.
 ```
+
+
+### `raise_fixture` - Compare raised exceptions
+
+Compare a raised exception with a pre-approved fixture.
+
+```ruby
+expect { raise 'some error' }.to raise_fixture('fixture_filename')
+```
+
 
 
 Modifiers
@@ -94,8 +104,8 @@ the same, using `diff` compares the strings using the
 In the below example, we allow up to 5 characters to be different.
 
 ```ruby
-expect('some string').to match_fixture('fixture_filename').diff(5)
-expect{ puts 'some string' }.to output_fixture('fixture_filename').diff(5)
+expect ('some string').to match_fixture('fixture_filename').diff(5)
+expect { puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ```
 
 
