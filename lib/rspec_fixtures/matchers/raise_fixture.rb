@@ -13,7 +13,7 @@ module RSpecFixtures
         @actual = 'Nothing raised'
 
         begin
-          CaptureStdout.capture block
+          block.call
         rescue => e
           @actual = e.inspect
         end

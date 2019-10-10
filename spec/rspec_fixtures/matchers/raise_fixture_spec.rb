@@ -10,7 +10,7 @@ describe Matchers::RaiseFixture do
 
     context "when the block does not raise anything" do
       it "uses compares with 'Nothing raised'" do
-        expect{ puts "not raising" }.to raise_fixture('nothing-raised')
+        expect{ "not raising" }.to raise_fixture('nothing-raised')
       end
     end
   end
