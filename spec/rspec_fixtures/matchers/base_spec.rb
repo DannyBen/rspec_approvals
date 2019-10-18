@@ -37,7 +37,7 @@ describe Matchers::Base do
       end
     end
 
-    context "when strip_ansi_escape is on", :focus do
+    context "when strip_ansi_escape is on" do
       before :all do 
         RSpec.configuration.strip_ansi_escape = true
       end
