@@ -12,13 +12,9 @@ module RSpecFixtures
       # Called by RSpec. This will be overridden by child matchers.
       def matches?(actual)
         @actual ||= actual
-
-        if RSpec.configuration.strip_ansi_escape
-          @actual = Strings::ANSI.sanitize @actual
-        end
-
         return false if @actual.empty?
 
+        @actual = sanitize @actual
         success = strings_match?
 
         if success or !interactive?
@@ -78,6 +74,12 @@ module RSpecFixtures
         true
       end
 
+      # Returns true if RSpec is configured to sanitize (remove ANSI escape
+      # codes) from the actual strings before proceeeding to comparing them.
+      def sanitize?
+        RSpec.configuration.strip_ansi_escape
+      end
+
       # Returns true if RSpec is configured to allow interactivity.
       # By default, interactivity is enabled unless the environment 
       # variable `CI` is set.
@@ -96,7 +98,7 @@ module RSpecFixtures
         "#{fixtures_dir}/#{fixture_name}"
       end
       
-      protected
+    protected
 
       # Asks for user approval. Used by child classes.
       def approve_fixture
@@ -130,6 +132,9 @@ module RSpecFixtures
         end
       end
 
+      def sanitize(string)
+        sanitize? ? Strings::ANSI.sanitize(string) : string
+      end
     end
 
   end

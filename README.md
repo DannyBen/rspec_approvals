@@ -188,5 +188,16 @@ delete the fixtures folder, and run the specs again with:
 $ AUTO_APPROVE=1 rspec
 ```
 
+### `strip_ansi_escape`
+
+In case your output strings contain ANSI escape codes that you wish to avoid
+storing in your fixtures, you can set the `strip_ansi_escape` to `true`.
+
+```ruby
+RSpec.configure do |config|
+  config.strip_ansi_escape = true
+end
+```
+
 
 [1]: https://en.wikipedia.org/wiki/Levenshtein_distance
