@@ -14,6 +14,7 @@ module RSpecFixtures
         @actual ||= actual
         return false if @actual.empty?
 
+        @actual = sanitize @actual
         success = strings_match?
 
         if success or !interactive?
@@ -73,6 +74,12 @@ module RSpecFixtures
         true
       end
 
+      # Returns true if RSpec is configured to sanitize (remove ANSI escape
+      # codes) from the actual strings before proceeeding to comparing them.
+      def sanitize?
+        RSpec.configuration.strip_ansi_escape
+      end
+
       # Returns true if RSpec is configured to allow interactivity.
       # By default, interactivity is enabled unless the environment 
       # variable `CI` is set.
@@ -91,7 +98,7 @@ module RSpecFixtures
         "#{fixtures_dir}/#{fixture_name}"
       end
       
-      protected
+    protected
 
       # Asks for user approval. Used by child classes.
       def approve_fixture
@@ -125,6 +132,11 @@ module RSpecFixtures
         end
       end
 
+      # Returns the input string stripped of ANSI escape codes if the 
+      # strip_ansi_escape configuration setting was set to true
+      def sanitize(string)
+        sanitize? ? Strings::ANSI.sanitize(string) : string
+      end
     end
 
   end

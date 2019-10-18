@@ -37,6 +37,22 @@ describe Matchers::Base do
       end
     end
 
+    context "when strip_ansi_escape is on" do
+      before :all do 
+        RSpec.configuration.strip_ansi_escape = true
+      end
+
+      after :all do
+        RSpec.configuration.strip_ansi_escape = false
+      end
+
+      it "removes ansi codes from the actual string" do
+        subject.matches? "\e[33;44msomething\e[0m"
+        expect(subject.actual).to eq 'something'
+      end
+
+    end
+
     context "with .diff" do
       before do
         subject.diff 5

@@ -1,3 +1,5 @@
+require 'strings-ansi'
+
 module RSpecFixtures
   # Capture stdout and stderr
   #
@@ -13,6 +15,7 @@ module RSpecFixtures
       block.call
 
       captured_stream.string
+
     ensure
       $stdout = original_stream
     end
@@ -28,6 +31,7 @@ module RSpecFixtures
       block.call
 
       captured_stream.string
+      
     ensure
       $stderr = original_stream
     end
