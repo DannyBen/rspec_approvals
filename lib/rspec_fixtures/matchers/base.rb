@@ -132,6 +132,8 @@ module RSpecFixtures
         end
       end
 
+      # Returns the input string stripped of ANSI escape codes if the 
+      # strip_ansi_escape configuration setting was set to true
       def sanitize(string)
         sanitize? ? Strings::ANSI.sanitize(string) : string
       end
