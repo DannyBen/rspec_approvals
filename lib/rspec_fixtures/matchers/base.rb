@@ -12,6 +12,11 @@ module RSpecFixtures
       # Called by RSpec. This will be overridden by child matchers.
       def matches?(actual)
         @actual ||= actual
+
+        if RSpec.configuration.strip_ansi_escape
+          @actual = Strings::ANSI.sanitize @actual
+        end
+
         return false if @actual.empty?
 
         success = strings_match?
