@@ -24,7 +24,7 @@ module RSpecFixtures
         end
       end
 
-      # Provides a chained matcher to do something like:
+      # Enables the ability to do something like:
       # `expect(string).to match_fixture(file).diff(10)
       # The distance argument is the max allowed Levenshtein Distance.
       def diff(distance)
@@ -32,18 +32,16 @@ module RSpecFixtures
         self
       end
 
-      def except(regex)
+      # Enables the ability to do something like:
+      # `expect(string).to match_fixture(file).except(/\d+/)
+      def except(regex, replace = '...')
         before ->(str) do
-          begin
-            str[regex, 1] = '...'
-          rescue IndexError
-          end
-          str
+          str.gsub regex, replace
         end
       end
 
-      # Provides a chained matcher to adjust the actual string before
-      # checking for matches:
+      # Enables the ability to adjust the actual string before checking
+      # for matches:
       # `expect(a).to match_fixture(f).before ->(actual) { actual.gsub /one/, 'two' }`
       def before(proc)
         @before ||= []
@@ -112,7 +110,7 @@ module RSpecFixtures
       end
 
       # Do the actual test. 
-      # - If .before() was used, we foreard the actual output to the
+      # - If .before() was used, we foreward the actual output to the
       #   proc for processing first.
       # - If .diff() was used, then distance will be set and then 
       #   we "levenshtein it". 
