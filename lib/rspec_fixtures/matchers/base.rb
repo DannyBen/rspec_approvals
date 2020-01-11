@@ -6,6 +6,7 @@ module RSpecFixtures
       attr_reader :fixture_name, :actual, :distance, :actual_distance
 
       def initialize(fixture_name=nil)
+        @before = nil
         @fixture_name = fixture_name
       end
 

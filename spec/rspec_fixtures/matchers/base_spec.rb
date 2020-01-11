@@ -75,7 +75,7 @@ describe Matchers::Base do
       subject { described_class.new 'except' }
 
       before do
-        subject.except /path: .*file.rb/
+        subject.except(/path: .*file.rb/)
       end
 
       context "when the strings are similar" do
@@ -95,7 +95,7 @@ describe Matchers::Base do
       subject { described_class.new 'except-replace' }
 
       before do
-        subject.except /^1.*9$/, '1...9'
+        subject.except(/^1.*9$/, '1...9')
       end
 
       context "when the strings are similar" do
