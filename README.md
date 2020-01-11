@@ -112,13 +112,22 @@ expect { puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ### `except` - Exclude by regular expression
 
 Adding `except(regex)` to either `match_fixture` or `output_fixture` will
-modify the string under test before running. The supplied regular expression
-must include exactly one capture group, which will be then replaced by '...'.
+modify the string under test before running. By default, the regular
+expression will be replaced with `...`.
 
 In the below example, we ignore the full path of the file.
 
 ```ruby
-expect('path: /path/to/file').to match_fixture('fixture_filename').except(/path: (.*)file/)
+expect('path: /path/to/file').to match_fixture('fixture_filename').except(/path: .*file/)
+```
+
+You may provide a second argument, which will be used as an alternative
+replace string:
+
+In the below example, all time strings will be replaced with `HH:MM`:
+
+```ruby
+expect('22:30').to match_fixture('fixture_filename').except(/\d2:\d2/, 'HH:MM')
 ```
 
 ### `before` - Alter the string before testing
