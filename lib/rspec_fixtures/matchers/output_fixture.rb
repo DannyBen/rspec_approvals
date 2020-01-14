@@ -23,19 +23,19 @@ module RSpecFixtures
       # expect{ stream }.to output_fixture(file).to_stdout
       # This is the default, and only provided for completeness.
       def to_stdout
-        @stream_capturer = CaptureStdout
+        @stream_capturer = Stream::Stdout
         self
       end
 
       # Adds chained matcher, to allow:
       # expect{ stream }.to output_fixture(file).to_stderr
       def to_stderr
-        @stream_capturer = CaptureStderr
+        @stream_capturer = Stream::Stderr
         self
       end
 
       def stream_capturer
-        @stream_capturer ||= CaptureStdout
+        @stream_capturer ||= Stream::Stdout
       end
 
     end
