@@ -99,7 +99,7 @@ Modifiers
 Adding `diff(distance)` to either `match_fixture` or `output_fixture` will
 change the matching behavior. Instead of expecting the strings to be exactly
 the same, using `diff` compares the strings using the 
-[Levenshtein distance][1] algorithm.
+[Levenshtein distance][levenshtein] algorithm.
 
 In the below example, we allow up to 5 characters to be different.
 
@@ -209,4 +209,36 @@ end
 ```
 
 
-[1]: https://en.wikipedia.org/wiki/Levenshtein_distance
+Advanced Usage Tips
+--------------------------------------------------
+
+In some cases, you might need to send output directly to the `RSpecFixture`
+stream capturer.
+
+An example use case, is when you are testing `Logger` output.
+
+The `RSpecFixture#stdout` and `RSpecFixture#stderr` can be used as an
+alternative to `$stdout` and `$stderr`. These methods both return the
+`StringIO` object that is used by `RSpecFixtures` to capture the output.
+
+For example, you can use this:
+
+```ruby
+logger = Logger.new(RSpecFixtures.stdout)
+```
+
+as an alternative to this:
+
+```
+logger = Logger.new($stdout)
+```
+
+Contributing / Support
+--------------------------------------------------
+
+If you experience any issue, have a question or a suggestion, or if you wish
+to contribute, feel free to [open an issue][issues].
+
+
+[levenshtein]: https://en.wikipedia.org/wiki/Levenshtein_distance
+[issues]: https://github.com/DannyBen/rspec_fixtures/issues

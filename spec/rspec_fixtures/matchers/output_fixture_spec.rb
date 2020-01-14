@@ -28,13 +28,13 @@ describe Matchers::OutputFixture do
 
   describe '#to_stdout' do
     it "sets @stream_capturer to CaotureStdout" do
-      expect(subject.to_stdout.stream_capturer).to be CaptureStdout
+      expect(subject.to_stdout.stream_capturer).to be Stream::Stdout
     end
   end
 
   describe '#to_stderr' do
     it "sets @stream_capturer to CaotureStderr" do
-      expect(subject.to_stderr.stream_capturer).to be CaptureStderr
+      expect(subject.to_stderr.stream_capturer).to be Stream::Stderr
     end
   end
 
