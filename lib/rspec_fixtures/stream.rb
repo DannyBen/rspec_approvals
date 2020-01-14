@@ -8,39 +8,33 @@ module RSpecFixtures
   module Stream
     module Stdout
       def self.capture(block)
-        captured_stream = RSpecFixtures.stdout
+        RSpecFixtures.stdout.truncate 0
+        RSpecFixtures.stdout.rewind
 
         original_stream = $stdout
-        $stdout = captured_stream
-
+        $stdout = RSpecFixtures.stdout
         block.call
-
-        result = captured_stream.string.dup
-        captured_stream.truncate 0
-        captured_stream.rewind
-        result
+        RSpecFixtures.stdout.string.dup
 
       ensure
         $stdout = original_stream
+
       end
     end
 
     module Stderr
       def self.capture(block)
-        captured_stream = RSpecFixtures.stderr
+        RSpecFixtures.stderr.truncate 0
+        RSpecFixtures.stderr.rewind
 
         original_stream = $stderr
-        $stderr = captured_stream
-
+        $stderr = RSpecFixtures.stderr
         block.call
+        RSpecFixtures.stderr.string.dup
 
-        result = captured_stream.string.dup
-        captured_stream.truncate 0
-        captured_stream.rewind
-        result
-        
       ensure
         $stderr = original_stream
+
       end
     end
   end

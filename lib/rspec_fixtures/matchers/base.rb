@@ -113,6 +113,8 @@ module RSpecFixtures
       # Do the actual test. 
       # - If .before() was used, we foreward the actual output to the
       #   proc for processing first.
+      # - If before_approval proc was configured, forward the acual output
+      #   to the proc for processing.
       # - If .diff() was used, then distance will be set and then 
       #   we "levenshtein it". 
       # - Otherwise, compare with ==
@@ -121,6 +123,10 @@ module RSpecFixtures
           @before.each do |proc|
             @actual = proc.call actual 
           end
+        end
+        
+        if RSpec.configuration.before_approval.is_a? Proc
+          @actual = RSpec.configuration.before_approval.call actual
         end
 
         if distance
