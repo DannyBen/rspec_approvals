@@ -197,6 +197,7 @@ delete the fixtures folder, and run the specs again with:
 $ AUTO_APPROVE=1 rspec
 ```
 
+
 ### `strip_ansi_escape`
 
 In case your output strings contain ANSI escape codes that you wish to avoid
@@ -207,6 +208,24 @@ RSpec.configure do |config|
   config.strip_ansi_escape = true
 end
 ```
+
+
+### `before_approval`
+
+In case you need to alter the actual output globally, you can provide the
+`before_approval` option with a proc. The proc will receive the actual
+output - similarly to the `before` modifier - and is expectedd to return
+a modified actual string.
+
+```ruby
+RSpec.configure do |config|
+  config.before_approval = ->(actual) do
+    # return the actual string, without IP addresses
+    actual.gsub(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/, '[IP REMOVED]')
+  end
+end
+```
+
 
 
 Advanced Usage Tips

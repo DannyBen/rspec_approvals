@@ -130,6 +130,23 @@ describe Matchers::Base do
       end
     end
 
+    context "when before_approval is set" do
+      before :all do 
+        RSpec.configuration.before_approval = ->(actual) do
+          "MODIFIED #{actual} MODIFIED"
+        end
+      end
+
+      after :all do
+        RSpec.configuration.before_approval = nil
+      end
+
+      it "sends the actual output to the proc before comparing" do
+        subject.matches? "something"
+        expect(subject.actual).to eq 'MODIFIED something MODIFIED'
+      end
+    end
+
   end
 
   describe '#expected' do
