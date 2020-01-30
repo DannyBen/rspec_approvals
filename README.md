@@ -2,7 +2,7 @@ RSpec Fixtures
 ==================================================
 
 [![Gem Version](https://badge.fury.io/rb/rspec_fixtures.svg)](https://badge.fury.io/rb/rspec_fixtures)
-[![Build Status](https://travis-ci.com/DannyBen/rspec_fixtures.svg?branch=master)](https://travis-ci.com/DannyBen/rspec_fixtures)
+[![Build Status](https://github.com/DannyBen/rspec_fixtures/workflows/Test/badge.svg)](https://github.com/DannyBen/rspec_fixtures/actions?query=workflow%3ATest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a06ed5e30412062c454c/maintainability)](https://codeclimate.com/github/DannyBen/rspec_fixtures/maintainability)
 
 ---
@@ -155,8 +155,8 @@ Configuration
 ### `interactive_fixtures`
 
 By default, interactive approvals are enabled in any environment that 
-does not define the `CI` environment variable. You can change this by
-adding this to your `spec_helper`
+does not define the `CI` or the `GITHUB_ACTIONS` environment variables.
+You can change this by adding this to your `spec_helper`
 
 ```ruby
 RSpec.configure do |config|
