@@ -1,5 +1,4 @@
-RSpec Fixtures
-==================================================
+# RSpec Fixtures
 
 [![Gem Version](https://badge.fury.io/rb/rspec_fixtures.svg)](https://badge.fury.io/rb/rspec_fixtures)
 [![Build Status](https://github.com/DannyBen/rspec_fixtures/workflows/Test/badge.svg)](https://github.com/DannyBen/rspec_fixtures/actions?query=workflow%3ATest)
@@ -13,14 +12,11 @@ content.
 This is a *"What You See is What You Test"* for your specs, because 
 *a Fixture is worth a thousand Mocks*... (too much?...)
 
-![demo](demo.gif)
+![Demo](demo/cast.svg)
 
 ---
 
-
-
-Install
---------------------------------------------------
+## Install
 
 ```
 $ gem install rspec_fixtures
@@ -32,10 +28,7 @@ Or with bundler:
 gem 'rspec_fixtures'
 ```
 
-
-
-Usage
---------------------------------------------------
+## Usage
 
 Require the gem in your spec helper:
 
@@ -54,10 +47,7 @@ describe 'ls' do
 end
 ```
 
-
-
-Matchers
---------------------------------------------------
+## Matchers
 
 ### `match_fixture` - Compare Strings
 
@@ -89,10 +79,7 @@ Compare a raised exception with a pre-approved fixture.
 expect { raise 'some error' }.to raise_fixture('fixture_filename')
 ```
 
-
-
-Modifiers
---------------------------------------------------
+## Modifiers
 
 ### `diff` - String similarity
 
@@ -107,7 +94,6 @@ In the below example, we allow up to 5 characters to be different.
 expect ('some string').to match_fixture('fixture_filename').diff(5)
 expect { puts 'some string' }.to output_fixture('fixture_filename').diff(5)
 ```
-
 
 ### `except` - Exclude by regular expression
 
@@ -148,9 +134,7 @@ end
 
 ```
 
-
-Configuration
---------------------------------------------------
+## Configuration
 
 ### `interactive_fixtures`
 
@@ -164,7 +148,6 @@ RSpec.configure do |config|
 end
 ```
 
-
 ### `fixtures_path`
 
 By default, fixtures are stored in `spec/fixtures`. To change the path,
@@ -175,7 +158,6 @@ RSpec.configure do |config|
   config.fixtures_path = 'spec/anywhere/else'
 end
 ```
-
 
 ### `auto_approve`
 
@@ -197,7 +179,6 @@ delete the fixtures folder, and run the specs again with:
 $ AUTO_APPROVE=1 rspec
 ```
 
-
 ### `strip_ansi_escape`
 
 In case your output strings contain ANSI escape codes that you wish to avoid
@@ -208,7 +189,6 @@ RSpec.configure do |config|
   config.strip_ansi_escape = true
 end
 ```
-
 
 ### `before_approval`
 
@@ -226,10 +206,7 @@ RSpec.configure do |config|
 end
 ```
 
-
-
-Advanced Usage Tips
---------------------------------------------------
+## Advanced Usage Tips
 
 In some cases, you might need to send output directly to the `RSpecFixture`
 stream capturer.
@@ -252,8 +229,7 @@ as an alternative to this:
 logger = Logger.new($stdout)
 ```
 
-Contributing / Support
---------------------------------------------------
+## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
 to contribute, feel free to [open an issue][issues].
