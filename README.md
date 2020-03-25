@@ -28,8 +28,6 @@ Or with bundler:
 gem 'rspec_fixtures'
 ```
 
-
-
 ## Usage
 
 Require the gem in your spec helper:
