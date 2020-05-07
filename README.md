@@ -208,6 +208,8 @@ end
 
 ## Advanced Usage Tips
 
+### Sending output directly to RSpecFixtures
+
 In some cases, you might need to send output directly to the `RSpecFixture`
 stream capturer.
 
@@ -227,6 +229,15 @@ as an alternative to this:
 
 ```
 logger = Logger.new($stdout)
+```
+
+### Consistent terminal width
+
+In case you are testing standard output with long lines, you may encounter inconsistencies when testing on different hosts, with varying terminal width. In order to ensure consistent output to stdout, you may want to set a known terminal size in your `spec_helper`:
+
+```ruby
+ENV['COLUMNS'] = '80'
+ENV['LINES'] = '24'
 ```
 
 ## Contributing / Support
