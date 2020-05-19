@@ -1,34 +1,34 @@
 require 'spec_helper'
 
 describe ApprovalHandler do
-  let(:fixture) { 'spec/fixtures/approval_handler' }
+  let(:approval) { 'spec/approvals/approval_handler' }
 
   def user_response(response)
     expect_any_instance_of(ApprovalHandler).to receive(:get_response).and_return response
   end
 
   describe '#run' do
-    context "when the fixture file does not exist" do
-      before { File.delete fixture if File.exist? fixture }
+    context "when the approval file does not exist" do
+      before { File.delete approval if File.exist? approval }
 
       it "only asks the user to Approve or Reject" do
         # Check that even after going down twice, we still remain at Approve
         stdin_send down_arrow, down_arrow, "\n" do
-          expect{ subject.run 'expected', 'actual', fixture }.to output(/Approved/).to_stdout
+          expect{ subject.run 'expected', 'actual', approval }.to output(/Approved/).to_stdout
         end
       end
 
       context "when the user answers Approve" do
         before { user_response :approve }
 
-        it "writes actual result to fixture and reutrns true" do
+        it "writes actual result to approval and reutrns true" do
           supress_output do
-            expect(subject.run 'expected', 'actual', fixture).to be true
+            expect(subject.run 'expected', 'actual', approval).to be true
           end
-          expect(File.read fixture).to eq 'actual'
+          expect(File.read approval).to eq 'actual'
         end
 
-        context "when the fixture folders do not exist" do
+        context "when the approval folders do not exist" do
           it "creates them using deep_write" do
             expect(File).to receive(:deep_write).with('some/deep/path', 'actual')
             supress_output do
@@ -41,11 +41,11 @@ describe ApprovalHandler do
       context "when the user answers Reject" do
         before { user_response :reject }
 
-        it "does not write to fixture and returns false" do
+        it "does not write to approval and returns false" do
           supress_output do
-            expect(subject.run 'expected', 'actual', fixture).to be false
+            expect(subject.run 'expected', 'actual', approval).to be false
           end
-          expect(File).not_to exist fixture
+          expect(File).not_to exist approval
         end      
       end
 
@@ -56,9 +56,9 @@ describe ApprovalHandler do
 
         it "acts as Reject" do
           supress_output do
-            expect(subject.run 'expected', 'actual', fixture).to be false
+            expect(subject.run 'expected', 'actual', approval).to be false
           end
-          expect(File).not_to exist fixture
+          expect(File).not_to exist approval
         end      
       end
 
@@ -69,16 +69,16 @@ describe ApprovalHandler do
         it "does not prompt the user for approval" do
           expect(subject).not_to receive(:get_response)
           supress_output do
-            expect(subject.run 'expected', 'actual', fixture).to be true
+            expect(subject.run 'expected', 'actual', approval).to be true
           end
-          expect(File.read fixture).to eq 'actual'
+          expect(File.read approval).to eq 'actual'
         end
       end
 
     end
 
-    context "when the fixture file exists" do
-      before { File.write fixture, 'expected output' }
+    context "when the approval file exists" do
+      before { File.write approval, 'expected output' }
 
       context "when the user answers Show Actual" do
         before do
@@ -87,7 +87,7 @@ describe ApprovalHandler do
         end
 
         it "shows the actual output" do
-          expect{ subject.run 'expected output', 'actual output', fixture }.to output(/actual output/).to_stdout
+          expect{ subject.run 'expected output', 'actual output', approval }.to output(/actual output/).to_stdout
         end
       end
 
@@ -97,8 +97,8 @@ describe ApprovalHandler do
           user_response :approve
         end
 
-        it "shows the expected fixture" do
-          expect{ subject.run 'expected output', 'actual output', fixture }.to output(/expected output/).to_stdout
+        it "shows the expected approval" do
+          expect{ subject.run 'expected output', 'actual output', approval }.to output(/expected output/).to_stdout
         end
       end
 
@@ -109,7 +109,7 @@ describe ApprovalHandler do
         end
 
         it "shows the diff" do
-          expect{ subject.run 'expected output', 'actual output', fixture }.to output(/-expected output.*\+actual output/m).to_stdout
+          expect{ subject.run 'expected output', 'actual output', approval }.to output(/-expected output.*\+actual output/m).to_stdout
         end
       end
     end

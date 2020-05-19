@@ -1,13 +1,13 @@
-module RSpecFixtures
+module RSpecApprovals
   module Matchers
 
-    # A base matcher for fixture approvals
+    # A base matcher for approvals
     class Base
-      attr_reader :fixture_name, :actual, :distance, :actual_distance
+      attr_reader :approval_name, :actual, :distance, :actual_distance
 
-      def initialize(fixture_name=nil)
+      def initialize(approval_name=nil)
         @before = nil
-        @fixture_name = fixture_name
+        @approval_name = approval_name
       end
 
       # Called by RSpec. This will be overridden by child matchers.
@@ -21,12 +21,12 @@ module RSpecFixtures
         if success or !interactive?
           success
         else
-          approve_fixture
+          approve_approval
         end
       end
 
       # Enables the ability to do something like:
-      # `expect(string).to match_fixture(file).diff(10)
+      # `expect(string).to match_approval(file).diff(10)
       # The distance argument is the max allowed Levenshtein Distance.
       def diff(distance)
         @distance = distance
@@ -34,7 +34,7 @@ module RSpecFixtures
       end
 
       # Enables the ability to do something like:
-      # `expect(string).to match_fixture(file).except(/\d+/)
+      # `expect(string).to match_approval(file).except(/\d+/)
       def except(regex, replace = '...')
         before ->(str) do
           str.gsub regex, replace
@@ -43,14 +43,14 @@ module RSpecFixtures
 
       # Enables the ability to adjust the actual string before checking
       # for matches:
-      # `expect(a).to match_fixture(f).before ->(actual) { actual.gsub /one/, 'two' }`
+      # `expect(a).to match_approval(f).before ->(actual) { actual.gsub /one/, 'two' }`
       def before(proc)
         @before ||= []
         @before << proc
         self
       end
 
-      # Returns the expected value, from a fixture file
+      # Returns the expected value, from an approval file
       def expected
         @expected ||= expected!
       end
@@ -83,31 +83,31 @@ module RSpecFixtures
       # By default, interactivity is enabled unless the environment 
       # variable `CI` is set.
       def interactive?
-        RSpec.configuration.interactive_fixtures
+        RSpec.configuration.interactive_approvals
       end
 
-      # Returns the path to the fixtures directory.
-      # Default: `spec/fixtures`
-      def fixtures_dir
-        RSpec.configuration.fixtures_path
+      # Returns the path to the approvals directory.
+      # Default: `spec/approvals`
+      def approvals_dir
+        RSpec.configuration.approvals_path
       end
 
-      # Returns the path to the fixture file
-      def fixture_file
-        "#{fixtures_dir}/#{fixture_name}"
+      # Returns the path to the approval file
+      def approval_file
+        "#{approvals_dir}/#{approval_name}"
       end
       
     protected
 
       # Asks for user approval. Used by child classes.
-      def approve_fixture
+      def approve_approval
         approval_handler = ApprovalHandler.new
-        approval_handler.run expected, actual, fixture_file
+        approval_handler.run expected, actual, approval_file
       end
 
-      # Returns the actual fixture file content.
+      # Returns the actual approval file content.
       def expected!
-        File.exist?(fixture_file) ? File.read(fixture_file) : ''
+        File.exist?(approval_file) ? File.read(approval_file) : ''
       end
 
       # Do the actual test. 

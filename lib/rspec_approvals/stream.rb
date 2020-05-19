@@ -1,6 +1,6 @@
 require 'strings-ansi'
 
-module RSpecFixtures
+module RSpecApprovals
   # Capture stdout and stderr
   #
   # These methods are borrowed from rspec's built in matchers
@@ -8,13 +8,13 @@ module RSpecFixtures
   module Stream
     module Stdout
       def self.capture(block)
-        RSpecFixtures.stdout.truncate 0
-        RSpecFixtures.stdout.rewind
+        RSpecApprovals.stdout.truncate 0
+        RSpecApprovals.stdout.rewind
 
         original_stream = $stdout
-        $stdout = RSpecFixtures.stdout
+        $stdout = RSpecApprovals.stdout
         block.call
-        RSpecFixtures.stdout.string.dup
+        RSpecApprovals.stdout.string.dup
 
       ensure
         $stdout = original_stream
@@ -24,13 +24,13 @@ module RSpecFixtures
 
     module Stderr
       def self.capture(block)
-        RSpecFixtures.stderr.truncate 0
-        RSpecFixtures.stderr.rewind
+        RSpecApprovals.stderr.truncate 0
+        RSpecApprovals.stderr.rewind
 
         original_stream = $stderr
-        $stderr = RSpecFixtures.stderr
+        $stderr = RSpecApprovals.stderr
         block.call
-        RSpecFixtures.stderr.string.dup
+        RSpecApprovals.stderr.string.dup
 
       ensure
         $stderr = original_stream

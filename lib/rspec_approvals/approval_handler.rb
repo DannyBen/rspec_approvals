@@ -3,18 +3,18 @@ require 'colsole'
 require 'tty-prompt'
 require 'diffy'
 
-module RSpecFixtures
+module RSpecApprovals
 
-  # Handles user input and interactive fixture approvals
+  # Handles user input and interactive approvals
   class ApprovalHandler
     include Colsole
 
-    attr_reader :expected, :actual, :fixture_file
+    attr_reader :expected, :actual, :approval_file
 
-    def run(expected, actual, fixture_file)
+    def run(expected, actual, approval_file)
       @expected = expected
       @actual = actual
-      @fixture_file = fixture_file
+      @approval_file = approval_file
 
       show expected.empty? ? actual : diff
       prompt_user
@@ -55,12 +55,12 @@ module RSpecFixtures
     def menu_options
       base = {
         'Reject (and fail test)' => :reject,
-        'Approve (and save fixture)' => :approve,
+        'Approve (and save)' => :approve,
       }
 
       extra = {
         'Show actual output' => :actual,
-        'Show expected fixture' => :expected,
+        'Show expected output' => :expected,
         'Show diff' => :diff,
       }
 
@@ -69,7 +69,7 @@ module RSpecFixtures
 
     def approve
       say "!txtgrn!Approved"
-      File.deep_write fixture_file, actual
+      File.deep_write approval_file, actual
       true
     end
 

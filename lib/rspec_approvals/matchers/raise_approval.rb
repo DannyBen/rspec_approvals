@@ -1,12 +1,12 @@
-module RSpecFixtures
+module RSpecApprovals
   module Matchers
     # Adds the matcher to RSpec:
-    # `expect { something_that_errors }.to raise_fixture(file)`
-    def raise_fixture(expected)
-      RaiseFixture.new expected
+    # `expect { something_that_errors }.to raise_approval(file)`
+    def raise_approval(expected)
+      RaiseApproval.new expected
     end
     
-    class RaiseFixture < Base
+    class RaiseApproval < Base
       # Called by RSpec
       def matches?(block)
         return false unless block.is_a? Proc

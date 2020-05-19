@@ -1,16 +1,13 @@
-# RSpec Fixtures
+# RSpec Approvals
 
-[![Gem Version](https://badge.fury.io/rb/rspec_fixtures.svg)](https://badge.fury.io/rb/rspec_fixtures)
-[![Build Status](https://github.com/DannyBen/rspec_fixtures/workflows/Test/badge.svg)](https://github.com/DannyBen/rspec_fixtures/actions?query=workflow%3ATest)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a06ed5e30412062c454c/maintainability)](https://codeclimate.com/github/DannyBen/rspec_fixtures/maintainability)
+[![Gem Version](https://badge.fury.io/rb/rspec_approvals.svg)](https://badge.fury.io/rb/rspec_approvals)
+[![Build Status](https://github.com/DannyBen/rspec_approvals/workflows/Test/badge.svg)](https://github.com/DannyBen/rspec_approvals/actions?query=workflow%3ATest)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a06ed5e30412062c454c/maintainability)](https://codeclimate.com/github/DannyBen/rspec_approvals/maintainability)
 
 ---
 
-RSpec Fixtures allows you to interactively review and approve testable
+RSpec Approvals allows you to interactively review and approve testable
 content. 
-
-This is a *"What You See is What You Test"* for your specs, because 
-*a Fixture is worth a thousand Mocks*... (too much?...)
 
 ![Demo](demo/cast.svg)
 
@@ -19,13 +16,13 @@ This is a *"What You See is What You Test"* for your specs, because
 ## Install
 
 ```
-$ gem install rspec_fixtures
+$ gem install rspec_approvals
 ```
 
 Or with bundler:
 
 ```ruby
-gem 'rspec_fixtures'
+gem 'rspec_approvals'
 ```
 
 ## Usage
@@ -34,7 +31,7 @@ Require the gem in your spec helper:
 
 ```ruby
 # spec/spec_helper.rb
-require 'rspec_fixtures'
+require 'rspec_approvals'
 ```
 
 And use any of the matchers in your specs.
@@ -42,48 +39,48 @@ And use any of the matchers in your specs.
 ```ruby
 describe 'ls' do
   it "works" do
-    expect(`ls`).to match_fixture('ls_fixture')
+    expect(`ls`).to match_approval('ls_approval')
   end
 end
 ```
 
 ## Matchers
 
-### `match_fixture` - Compare Strings
+### `match_approval` - Compare Strings
 
-Compare a string with a pre-approved fixture.
+Compare a string with a pre-approved approval.
 
 ```ruby
-expect('some string').to match_fixture('fixture_filename')
+expect('some string').to match_approval('approval_filename')
 ```
 
 
-### `output_fixture` - Compare STDOUT/STDERR
+### `output_approval` - Compare STDOUT/STDERR
 
-Compare an output (stdout or stderr) with a pre-approved fixture.
+Compare an output (stdout or stderr) with a pre-approved approval.
 
 ```ruby
-expect { puts "hello" }.to output_fixture('fixture_filename')
-expect { puts "hello" }.to output_fixture('fixture_filename').to_stdout
-expect { $stderr.puts "hello" }.to output_fixture('fixture_filename').to_stderr
+expect { puts "hello" }.to output_approval('approval_filename')
+expect { puts "hello" }.to output_approval('approval_filename').to_stdout
+expect { $stderr.puts "hello" }.to output_approval('approval_filename').to_stderr
 
 # The first two are the same, as the default stream is stdout.
 ```
 
 
-### `raise_fixture` - Compare raised exceptions
+### `raise_approval` - Compare raised exceptions
 
-Compare a raised exception with a pre-approved fixture.
+Compare a raised exception with a pre-approved approval.
 
 ```ruby
-expect { raise 'some error' }.to raise_fixture('fixture_filename')
+expect { raise 'some error' }.to raise_approval('approval_filename')
 ```
 
 ## Modifiers
 
 ### `diff` - String similarity
 
-Adding `diff(distance)` to either `match_fixture` or `output_fixture` will
+Adding `diff(distance)` to either `match_approval` or `output_approval` will
 change the matching behavior. Instead of expecting the strings to be exactly
 the same, using `diff` compares the strings using the 
 [Levenshtein distance][levenshtein] algorithm.
@@ -91,20 +88,20 @@ the same, using `diff` compares the strings using the
 In the below example, we allow up to 5 characters to be different.
 
 ```ruby
-expect ('some string').to match_fixture('fixture_filename').diff(5)
-expect { puts 'some string' }.to output_fixture('fixture_filename').diff(5)
+expect ('some string').to match_approval('approval_filename').diff(5)
+expect { puts 'some string' }.to output_approval('approval_filename').diff(5)
 ```
 
 ### `except` - Exclude by regular expression
 
-Adding `except(regex)` to either `match_fixture` or `output_fixture` will
+Adding `except(regex)` to either `match_approval` or `output_approval` will
 modify the string under test before running. By default, the regular
 expression will be replaced with `...`.
 
 In the below example, we ignore the full path of the file.
 
 ```ruby
-expect('path: /path/to/file').to match_fixture('fixture_filename').except(/path: .*file/)
+expect('path: /path/to/file').to match_approval('approval_filename').except(/path: .*file/)
 ```
 
 You may provide a second argument, which will be used as an alternative
@@ -113,7 +110,7 @@ replace string:
 In the below example, all time strings will be replaced with `HH:MM`:
 
 ```ruby
-expect('22:30').to match_fixture('fixture_filename').except(/\d2:\d2/, 'HH:MM')
+expect('22:30').to match_approval('approval_filename').except(/\d2:\d2/, 'HH:MM')
 ```
 
 ### `before` - Alter the string before testing
@@ -121,14 +118,14 @@ expect('22:30').to match_fixture('fixture_filename').except(/\d2:\d2/, 'HH:MM')
 The `before(proc)` method is a low level method and should normally not be 
 used directly (as it is used by the `except` modifier).
 
-Adding `before(proc)` to either `match_fixture` or `output_fixture` will
+Adding `before(proc)` to either `match_approval` or `output_approval` will
 call the block and supply the actual string. The proc is expected to return
 the new actual string.
 
 In the below example, we replace all email addresses in a string.
 
 ```ruby
-expect('hello rspec@fixtures.com').to match_fixture('fixture_filename').before ->(actual) do
+expect('hello rspec@approvals.com').to match_approval('approval_filename').before ->(actual) do
   actual.gsub /\w+@\w+\.\w+/, 'some@email.com'
 end
 
@@ -136,7 +133,7 @@ end
 
 ## Configuration
 
-### `interactive_fixtures`
+### `interactive_approvals`
 
 By default, interactive approvals are enabled in any environment that 
 does not define the `CI` or the `GITHUB_ACTIONS` environment variables.
@@ -144,24 +141,24 @@ You can change this by adding this to your `spec_helper`
 
 ```ruby
 RSpec.configure do |config|
-  config.interactive_fixtures = false # or any logic
+  config.interactive_approvals = false # or any logic
 end
 ```
 
-### `fixtures_path`
+### `approvals_path`
 
-By default, fixtures are stored in `spec/fixtures`. To change the path,
+By default, approvals are stored in `spec/approvals`. To change the path,
 add this to your `spec_helper`.
 
 ```ruby
 RSpec.configure do |config|
-  config.fixtures_path = 'spec/anywhere/else'
+  config.approvals_path = 'spec/anywhere/else'
 end
 ```
 
 ### `auto_approve`
 
-If you wish to automatically approve all new or changed fixtures, you can
+If you wish to automatically approve all new or changed approvals, you can
 set the `auto_approve` configuration option to `true`. By default, 
 auto approval is enabled if the environment variable `AUTO_APPROVE` is set.
 
@@ -171,9 +168,9 @@ RSpec.configure do |config|
 end
 ```
 
-This feature is intended to help clean up the fixtures folder from old, no
+This feature is intended to help clean up the approvals folder from old, no
 longer used files. Simply run the specs once, to ensure they all oass, 
-delete the fixtures folder, and run the specs again with:
+delete the approvals folder, and run the specs again with:
 
 ```
 $ AUTO_APPROVE=1 rspec
@@ -182,7 +179,7 @@ $ AUTO_APPROVE=1 rspec
 ### `strip_ansi_escape`
 
 In case your output strings contain ANSI escape codes that you wish to avoid
-storing in your fixtures, you can set the `strip_ansi_escape` to `true`.
+storing in your approvals, you can set the `strip_ansi_escape` to `true`.
 
 ```ruby
 RSpec.configure do |config|
@@ -208,21 +205,21 @@ end
 
 ## Advanced Usage Tips
 
-### Sending output directly to RSpecFixtures
+### Sending output directly to RSpecApprovals
 
-In some cases, you might need to send output directly to the `RSpecFixture`
+In some cases, you might need to send output directly to the `RSpecApproval`
 stream capturer.
 
 An example use case, is when you are testing `Logger` output.
 
-The `RSpecFixture#stdout` and `RSpecFixture#stderr` can be used as an
+The `RSpecApproval#stdout` and `RSpecApproval#stderr` can be used as an
 alternative to `$stdout` and `$stderr`. These methods both return the
-`StringIO` object that is used by `RSpecFixtures` to capture the output.
+`StringIO` object that is used by `RSpecApprovals` to capture the output.
 
 For example, you can use this:
 
 ```ruby
-logger = Logger.new(RSpecFixtures.stdout)
+logger = Logger.new(RSpecApprovals.stdout)
 ```
 
 as an alternative to this:
@@ -247,4 +244,4 @@ to contribute, feel free to [open an issue][issues].
 
 
 [levenshtein]: https://en.wikipedia.org/wiki/Levenshtein_distance
-[issues]: https://github.com/DannyBen/rspec_fixtures/issues
+[issues]: https://github.com/DannyBen/rspec_approvals/issues

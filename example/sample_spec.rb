@@ -1,62 +1,62 @@
 require 'rspec'
-require 'rspec_fixtures'
+require 'rspec_approvals'
 require "fileutils"
 
-RSpec.configure { |c| c.fixtures_path = 'example/fixtures' }
+RSpec.configure { |c| c.approvals_path = 'example/approvals' }
 
 describe 'interactivity' do
-  subject { "shiny fixture" }
+  subject { "shiny approval" }
 
-  context 'when a fixture does not exist' do
+  context 'when a approval does not exist' do
     before do
-      file = 'example/fixtures/interactive1'
+      file = 'example/approvals/interactive1'
       FileUtils.rm file if File.exist? file
     end
 
     it 'asks the user to approve the new content' do
-      expect(subject).to match_fixture('interactive1')
+      expect(subject).to match_approval('interactive1')
     end
   end
 
-  context 'when the fixture exists, but different' do
+  context 'when the approval exists, but different' do
     before do
-      File.write 'example/fixtures/interactive2', 'old, wrinkled fixture'
+      File.write 'example/approvals/interactive2', 'old, wrinkled approval'
     end
 
     it 'shows the old and new versions to the user' do
-      expect(subject).to match_fixture('interactive2')
+      expect(subject).to match_approval('interactive2')
     end
   end
 end
 
-describe 'match_fixture' do
-  subject { "this fixture is a match" }
+describe 'match_approval' do
+  subject { "this approval is a match" }
 
   it "works" do
-    expect(subject).to match_fixture("match_fixture")
+    expect(subject).to match_approval("match_approval")
   end
 
   context "with diff" do
-    subject { "this fixture is a ALMOST A match" }
+    subject { "this approval is a ALMOST A match" }
 
     it "works, despite the string being a little different" do
-      expect(subject).to match_fixture("match_fixture").diff(9)
+      expect(subject).to match_approval("match_approval").diff(9)
     end
   end
 end
 
-describe 'output_fixture' do
-  subject { puts "this fixture is an output" }
+describe 'output_approval' do
+  subject { puts "this approval is an output" }
 
   it "works" do
-    expect{ subject }.to output_fixture("output_fixture")
+    expect{ subject }.to output_approval("output_approval")
   end
 
   context "with diff" do
-    subject { puts "this fixture is a DIFFERENT output" }
+    subject { puts "this approval is a DIFFERENT output" }
 
     it "works, despite the string being a little different" do
-      expect{ subject }.to output_fixture("output_fixture").diff(10)
+      expect{ subject }.to output_approval("output_approval").diff(10)
     end
   end
 end
