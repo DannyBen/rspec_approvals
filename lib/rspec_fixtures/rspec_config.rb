@@ -1,5 +1,8 @@
 # Add our custom matchers and configuration options to RSpec
 if defined? RSpec
+  # Fix for rails
+  require 'rspec/core' unless RSpec.respond_to? :configure
+
   RSpec.configure do |config|
     config.include RSpecFixtures::Matchers
     config.add_setting :fixtures_path, default: File.expand_path('spec/fixtures')
