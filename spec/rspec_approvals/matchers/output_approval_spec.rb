@@ -1,26 +1,26 @@
 require 'spec_helper'
 
-describe Matchers::OutputFixture do
-  subject { Matchers::OutputFixture.new 'something' }
+describe Matchers::OutputApproval do
+  subject { Matchers::OutputApproval.new 'something' }
 
-  describe '::output_fixture' do
+  describe '::output_approval' do
     it "works" do
-      expect{ print 'anything' }.to output_fixture('anything')
+      expect{ print 'anything' }.to output_approval('anything')
     end
   end
 
   describe '#matches?' do
     context "when interactive mode is enabled" do
       before :all do 
-        RSpec.configuration.interactive_fixtures = true
+        RSpec.configuration.interactive_approvals = true
       end
 
       after :all do
-        RSpec.configuration.interactive_fixtures = false
+        RSpec.configuration.interactive_approvals = false
       end
 
       it "requests user approval" do
-        expect(subject).to receive(:approve_fixture).and_return true
+        expect(subject).to receive(:approve_approval).and_return true
         expect(subject.matches? Proc.new { puts 'nothing' } ).to be true
       end
     end

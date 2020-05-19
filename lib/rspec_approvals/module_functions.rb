@@ -1,4 +1,4 @@
-module RSpecFixtures
+module RSpecApprovals
   class << self
     def stdout
       @stdout ||= StringIO.new

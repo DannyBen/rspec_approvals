@@ -1,12 +1,12 @@
 require "runfile-tasks"
-require_relative 'lib/rspec_fixtures'
-require_relative 'lib/rspec_fixtures/version'
+require_relative 'lib/rspec_approvals'
+require_relative 'lib/rspec_approvals/version'
 
-title   "RSpec Fixtures Developer Toolbelt"
-summary "Runfile tasks for building the RSpec Fixtures gem"
-version RSpecFixtures::VERSION
+title   "RSpec Approvals Developer Toolbelt"
+summary "Runfile tasks for building the RSpec Approvals gem"
+version RSpecApprovals::VERSION
 
-RunfileTasks::RubyGems.all 'rspec_fixtures'
+RunfileTasks::RubyGems.all 'rspec_approvals'
 RunfileTasks::Testing.rspec
 
 help   "Run interactive console"

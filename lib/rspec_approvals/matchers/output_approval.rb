@@ -1,12 +1,12 @@
-module RSpecFixtures
+module RSpecApprovals
   module Matchers
     # Adds the matcher to RSpec:
-    # `expect { stream }.to output_fixture(file)`
-    def output_fixture(expected)
-      OutputFixture.new expected
+    # `expect { stream }.to output_approval(file)`
+    def output_approval(expected)
+      OutputApproval.new expected
     end
     
-    class OutputFixture < Base
+    class OutputApproval < Base
       # Called by RSpec
       def matches?(block)
         return false unless block.is_a? Proc
@@ -20,7 +20,7 @@ module RSpecFixtures
       end
 
       # Adds chained matcher, to allow:
-      # expect{ stream }.to output_fixture(file).to_stdout
+      # expect { stream }.to output_approval(file).to_stdout
       # This is the default, and only provided for completeness.
       def to_stdout
         @stream_capturer = Stream::Stdout
@@ -28,7 +28,7 @@ module RSpecFixtures
       end
 
       # Adds chained matcher, to allow:
-      # expect{ stream }.to output_fixture(file).to_stderr
+      # expect { stream }.to output_approval(file).to_stderr
       def to_stderr
         @stream_capturer = Stream::Stderr
         self

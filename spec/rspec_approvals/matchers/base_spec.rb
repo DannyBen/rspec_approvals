@@ -27,8 +27,8 @@ describe Matchers::Base do
       end
     end
 
-    context "when the fixture file does not exist" do
-      subject { described_class.new 'no-such-fixture' }
+    context "when the approval file does not exist" do
+      subject { described_class.new 'no-such-approval' }
       
       context "when actual is empty" do
         it "returns false" do
@@ -150,8 +150,8 @@ describe Matchers::Base do
   end
 
   describe '#expected' do
-    it "loads fixture content from a file" do
-      expect(subject.expected).to eq File.read('spec/fixtures/something')
+    it "loads approval content from a file" do
+      expect(subject.expected).to eq File.read('spec/approvals/something')
     end
   end
 
@@ -170,7 +170,7 @@ describe Matchers::Base do
     end
 
     context "when the actual string is empty" do
-      subject { described_class.new 'no-such-fixture' }
+      subject { described_class.new 'no-such-approval' }
 
       it "returns a proper message" do
         subject.matches? ''
@@ -179,9 +179,9 @@ describe Matchers::Base do
     end
   end
 
-  describe '#fixture_file' do
+  describe '#approval_file' do
     it "returns a path" do
-      expect(subject.fixture_file).to eq "#{subject.fixtures_dir}/#{subject.fixture_name}"
+      expect(subject.approval_file).to eq "#{subject.approvals_dir}/#{subject.approval_name}"
     end
   end
 
