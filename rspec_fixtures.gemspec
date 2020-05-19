@@ -21,4 +21,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'diffy', '~> 3.3'
   s.add_runtime_dependency 'tty-prompt', '~> 0.19'
   s.add_runtime_dependency 'strings-ansi', '~> 0.1'
+
+  s.post_install_message = "Note: rspec_fixtures is now rspec_approvals, update your Gemfile."
 end
