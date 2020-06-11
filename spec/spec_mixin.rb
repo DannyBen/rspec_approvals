@@ -4,6 +4,10 @@ class StringIO
   def wait_readable(*)
     true
   end
+
+  def ioctl(*)
+    80
+  end
 end
 
 module SpecMixin
