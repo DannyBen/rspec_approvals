@@ -87,6 +87,7 @@ module RSpecApprovals
     end
 
     def show(what)
+      say ""
       say separator
       say what
       say separator

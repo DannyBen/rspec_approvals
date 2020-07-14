@@ -237,6 +237,17 @@ ENV['COLUMNS'] = '80'
 ENV['LINES'] = '24'
 ```
 
+### Recommended rspec flags
+
+For best results, it is recommended you configure rspec to use the
+documentation format. Place the code below in a file named `.rspec`
+in your project's directory:
+
+```
+--color
+--format documentation
+```
+
 ## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
