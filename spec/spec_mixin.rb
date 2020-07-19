@@ -1,27 +1,6 @@
 require 'stringio'
 
-class StringIO
-  def wait_readable(*)
-    true
-  end
-
-  def ioctl(*)
-    80
-  end
-end
-
 module SpecMixin
-  def stdin_send(*args)
-    begin
-      $stdin = StringIO.new
-      $stdin.puts(args.shift) until args.empty?
-      $stdin.rewind
-      yield
-    ensure
-      $stdin = STDIN
-    end
-  end
-
   def supress_output
     original_stdout = $stdout
     $stdout = StringIO.new
@@ -30,9 +9,5 @@ module SpecMixin
     ensure
       $stdout = original_stdout
     end
-  end
-
-  def down_arrow
-    "\e[B"
   end
 end

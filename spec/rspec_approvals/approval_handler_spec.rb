@@ -12,10 +12,12 @@ describe ApprovalHandler do
       before { File.delete approval if File.exist? approval }
 
       it "only asks the user to Approve or Reject" do
-        # Check that even after going down twice, we still remain at Approve
-        stdin_send down_arrow, down_arrow, "\n" do
-          expect{ subject.run 'expected', 'actual', approval }.to output(/Approved/).to_stdout
-        end
+        expect(subject.prompt).to receive(:select)
+          .with("Please Choose:", {"Approve (and save)"=>:approve, "Reject (and fail test)"=>:reject}, any_args)
+          .and_return("Reject")
+
+        expect { subject.run '', 'actual', approval }
+          .to output(/actual/).to_stdout
       end
 
       context "when the user answers Approve" do
@@ -87,7 +89,8 @@ describe ApprovalHandler do
         end
 
         it "shows the actual output" do
-          expect{ subject.run 'expected output', 'actual output', approval }.to output(/actual output/).to_stdout
+          expect { subject.run 'expected output', 'actual output', approval }
+            .to output(/actual output/).to_stdout
         end
       end
 
@@ -98,7 +101,8 @@ describe ApprovalHandler do
         end
 
         it "shows the expected approval" do
-          expect{ subject.run 'expected output', 'actual output', approval }.to output(/expected output/).to_stdout
+          expect { subject.run 'expected output', 'actual output', approval }
+            .to output(/expected output/).to_stdout
         end
       end
 
@@ -109,7 +113,8 @@ describe ApprovalHandler do
         end
 
         it "shows the diff" do
-          expect{ subject.run 'expected output', 'actual output', approval }.to output(/-expected output.*\+actual output/m).to_stdout
+          expect { subject.run 'expected output', 'actual output', approval }
+            .to output(/-expected output.*\+actual output/m).to_stdout
         end
       end
     end

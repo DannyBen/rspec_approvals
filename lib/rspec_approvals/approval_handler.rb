@@ -20,7 +20,11 @@ module RSpecApprovals
       prompt_user
     end
 
-    private
+    def prompt
+      @prompt ||= TTY::Prompt.new
+    end
+
+  private
 
     def prompt_user
       response = auto_approve? ? :approve : get_response
@@ -91,10 +95,6 @@ module RSpecApprovals
       say separator
       say what
       say separator
-    end
-
-    def prompt
-      @prompt ||= TTY::Prompt.new
     end
   end
 end
