@@ -1,6 +1,5 @@
 require 'io/console'
 require 'colsole'
-require 'tty-prompt'
 require 'diffy'
 
 module RSpecApprovals
@@ -18,10 +17,6 @@ module RSpecApprovals
 
       show expected.empty? ? actual : diff
       prompt_user
-    end
-
-    def prompt
-      @prompt ||= TTY::Prompt.new
     end
 
   private
@@ -49,23 +44,19 @@ module RSpecApprovals
     end
 
     def get_response
-      prompt.select "Please Choose:", menu_options, symbols: { marker: '>' }
-    rescue TTY::Reader::InputInterrupt
-      # :nocov:
-      return :reject
-      # :nocov:
+      Prompt.select "Please Choose:", 'r', menu_options
     end
 
     def menu_options
       base = {
-        'Reject (and fail test)' => :reject,
-        'Approve (and save)' => :approve,
+        'a' => ['Approve (and save)', :approve],
+        'r' => ['Reject (and fail test)', :reject]
       }
 
       extra = {
-        'Show actual output' => :actual,
-        'Show expected output' => :expected,
-        'Show diff' => :diff,
+        '1' => ['Show actual output', :actual],
+        '2' => ['Show expected output', :expected],
+        '3' => ['Show diff', :diff]
       }
 
       expected.empty? ? base : base.merge(extra) 

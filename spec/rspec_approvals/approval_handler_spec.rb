@@ -10,10 +10,14 @@ describe ApprovalHandler do
   describe '#run' do
     context "when the approval file does not exist" do
       before { File.delete approval if File.exist? approval }
+      let(:base_menu_options) {{
+        'a' => ['Approve (and save)', :approve],
+        'r' => ['Reject (and fail test)', :reject]
+      }}
 
       it "only asks the user to Approve or Reject" do
-        expect(subject.prompt).to receive(:select)
-          .with("Please Choose:", {"Approve (and save)"=>:approve, "Reject (and fail test)"=>:reject}, any_args)
+        expect(Prompt).to receive(:select)
+          .with("Please Choose:", 'r', base_menu_options)
           .and_return("Reject")
 
         expect { subject.run '', 'actual', approval }
