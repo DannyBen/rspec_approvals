@@ -1,7 +1,7 @@
 require 'rspec_approvals/extensions/file'
-require 'rspec_approvals/extensions/stringio'
 
 require 'rspec_approvals/module_functions'
+require 'rspec_approvals/prompt'
 require 'rspec_approvals/stream'
 require 'rspec_approvals/approval_handler'
 require 'rspec_approvals/matchers/base'
