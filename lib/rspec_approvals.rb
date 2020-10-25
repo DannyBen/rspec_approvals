@@ -1,4 +1,5 @@
 require 'rspec_approvals/extensions/file'
+require 'rspec_approvals/extensions/stringio'
 
 require 'rspec_approvals/module_functions'
 require 'rspec_approvals/prompt'
