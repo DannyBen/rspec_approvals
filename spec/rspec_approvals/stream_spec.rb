@@ -1,17 +1,22 @@
 require 'spec_helper'
 
-describe Stream::Stdout do
-  let(:proc) { Proc.new { print "hello world" } }
-
-  it "captures stdout" do
-    expect(described_class.capture proc).to eq "hello world"
+describe Stream do
+  let(:output) do
+    Proc.new do
+      print "this is stdOUT"
+      $stderr.print "this is stdERR"
+    end
   end
-end
 
-describe Stream::Stderr do
-  let(:proc) { Proc.new { $stderr.print "hello world" } }
-
-  it "captures stdout" do
-    expect(described_class.capture proc).to eq "hello world"
+  describe Stream::Stdout do
+    it "captures stdout" do
+      expect(described_class.capture output).to eq "this is stdOUT"
+    end
+  end
+  
+  describe Stream::Stderr do
+    it "captures stderr" do
+      expect(described_class.capture output).to eq "this is stdERR"
+    end
   end
 end

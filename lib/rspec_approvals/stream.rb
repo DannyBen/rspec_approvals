@@ -6,35 +6,36 @@ module RSpecApprovals
   # These methods are borrowed from rspec's built in matchers
   # https://github.com/rspec/rspec-expectations/blob/add9b271ecb1d65f7da5bc8a9dd8c64d81d92303/lib/rspec/matchers/built_in/output.rb
   module Stream
-    module Stdout
-      def self.capture(block)
+    module Capture
+      def self.capture(stream, block)
         RSpecApprovals.stdout.truncate 0
         RSpecApprovals.stdout.rewind
+        RSpecApprovals.stderr.truncate 0
+        RSpecApprovals.stderr.rewind
 
-        original_stream = $stdout
+        stdout_original_stream = $stdout
+        stderr_original_stream = $stderr
         $stdout = RSpecApprovals.stdout
+        $stderr = RSpecApprovals.stderr
         block.call
-        RSpecApprovals.stdout.string.dup
+        RSpecApprovals.send(stream).string.dup
 
       ensure
-        $stdout = original_stream
+        $stdout = stdout_original_stream
+        $stderr = stderr_original_stream
 
+      end
+    end
+
+    module Stdout
+      def self.capture(block)
+        Capture.capture :stdout, block
       end
     end
 
     module Stderr
       def self.capture(block)
-        RSpecApprovals.stderr.truncate 0
-        RSpecApprovals.stderr.rewind
-
-        original_stream = $stderr
-        $stderr = RSpecApprovals.stderr
-        block.call
-        RSpecApprovals.stderr.string.dup
-
-      ensure
-        $stderr = original_stream
-
+        Capture.capture :stderr, block
       end
     end
   end
