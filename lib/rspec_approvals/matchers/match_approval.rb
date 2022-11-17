@@ -7,9 +7,8 @@ module RSpecApprovals
     def match_approval(expected)
       MatchApproval.new expected
     end
-    
+
     class MatchApproval < Base
     end
-    
   end
 end

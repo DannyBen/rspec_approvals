@@ -11,12 +11,12 @@ module RSpecApprovals
           color = key == default ? 'txtred' : 'txtgrn'
           say "!#{color}!#{key}!txtrst!) #{config.first}"
         end
-        
+
         say "\n!txtblu!#{prompt}!txtrst! "
-        response = STDIN.getch.downcase
-        
+        response = $stdin.getch.downcase
+
         response = default unless options.has_key? response
-        
+
         resay "!txtpur!#{options[response].first}"
         options[response].last
       end

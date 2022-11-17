@@ -3,7 +3,6 @@ require 'colsole'
 require 'diffy'
 
 module RSpecApprovals
-
   # Handles user input and interactive approvals
   class ApprovalHandler
     include Colsole
@@ -22,7 +21,7 @@ module RSpecApprovals
   private
 
     def prompt_user
-      response = auto_approve? ? :approve : get_response
+      response = auto_approve? ? :approve : user_response
 
       case response
 
@@ -43,38 +42,38 @@ module RSpecApprovals
       RSpec.configuration.auto_approve
     end
 
-    def get_response
-      Prompt.select "Please Choose:", 'r', menu_options
+    def user_response
+      Prompt.select 'Please Choose:', 'r', menu_options
     end
 
     def menu_options
       base = {
         'a' => ['Approve (and save)', :approve],
-        'r' => ['Reject (and fail test)', :reject]
+        'r' => ['Reject (and fail test)', :reject],
       }
 
       extra = {
         '1' => ['Show actual output', :actual],
         '2' => ['Show expected output', :expected],
-        '3' => ['Show diff', :diff]
+        '3' => ['Show diff', :diff],
       }
 
-      expected.empty? ? base : base.merge(extra) 
+      expected.empty? ? base : base.merge(extra)
     end
 
     def approve
-      say "!txtgrn!Approved"
+      say '!txtgrn!Approved'
       File.deep_write approval_file, actual
       true
     end
 
     def reject
-      say "!txtred!Not Approved"
+      say '!txtred!Not Approved'
       false
     end
 
     def separator
-      "!txtgrn!" + ('_' * terminal_width)
+      "!txtgrn!#{'_' * terminal_width}"
     end
 
     def diff
@@ -82,7 +81,7 @@ module RSpecApprovals
     end
 
     def show(what)
-      say ""
+      say ''
       say separator
       say what
       say separator

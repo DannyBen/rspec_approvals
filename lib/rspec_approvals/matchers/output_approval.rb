@@ -5,11 +5,12 @@ module RSpecApprovals
     def output_approval(expected)
       OutputApproval.new expected
     end
-    
+
     class OutputApproval < Base
       # Called by RSpec
       def matches?(block)
         return false unless block.is_a? Proc
+
         @actual = stream_capturer.capture block
         super
       end
@@ -37,7 +38,6 @@ module RSpecApprovals
       def stream_capturer
         @stream_capturer ||= Stream::Stdout
       end
-
     end
   end
 end
