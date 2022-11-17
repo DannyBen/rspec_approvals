@@ -4,7 +4,7 @@ describe ApprovalHandler do
   let(:approval) { 'spec/approvals/approval_handler' }
 
   def user_response(response)
-    expect_any_instance_of(ApprovalHandler).to receive(:get_response).and_return response
+    expect_any_instance_of(ApprovalHandler).to receive(:user_response).and_return response
   end
 
   describe '#run' do
@@ -75,7 +75,7 @@ describe ApprovalHandler do
         after  { RSpec.configuration.auto_approve = false }
 
         it 'does not prompt the user for approval' do
-          expect(subject).not_to receive(:get_response)
+          expect(subject).not_to receive(:user_response)
           supress_output do
             expect(subject.run 'expected', 'actual', approval).to be true
           end

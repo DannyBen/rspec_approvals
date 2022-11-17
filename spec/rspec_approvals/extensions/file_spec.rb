@@ -6,8 +6,8 @@ describe File do
     let(:dir) { File.dirname file }
 
     before do
-      FileUtils.rm_f file
-      FileUtils.rm_f dir
+      File.delete file if File.exist? file
+      Dir.delete dir if Dir.exist? dir
       expect(File).not_to exist file
       expect(Dir).not_to exist dir
     end

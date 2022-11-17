@@ -43,7 +43,7 @@ describe Matchers::MatchApproval do
         end
 
         it 'asks for approval and creates the approval' do
-          expect_any_instance_of(ApprovalHandler).to receive(:get_response).and_return :approve
+          expect_any_instance_of(ApprovalHandler).to receive(:user_response).and_return :approve
           expect { subject.matches? 'no_such_approval' }.to output(/no_such_approval/).to_stdout
           expect(File).to exist(file)
         end
