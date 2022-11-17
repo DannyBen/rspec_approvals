@@ -5,11 +5,12 @@ module RSpecApprovals
     def raise_approval(expected)
       RaiseApproval.new expected
     end
-    
+
     class RaiseApproval < Base
       # Called by RSpec
       def matches?(block)
         return false unless block.is_a? Proc
+
         @actual = 'Nothing raised'
 
         begin
