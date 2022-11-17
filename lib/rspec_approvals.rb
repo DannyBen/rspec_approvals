@@ -11,4 +11,3 @@ require 'rspec_approvals/matchers/output_approval'
 require 'rspec_approvals/matchers/raise_approval'
 
 require 'rspec_approvals/rspec_config'
-

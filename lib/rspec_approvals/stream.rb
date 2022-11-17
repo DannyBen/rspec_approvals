@@ -19,11 +19,9 @@ module RSpecApprovals
         $stderr = RSpecApprovals.stderr
         block.call
         RSpecApprovals.send(stream).string.dup
-
       ensure
         $stdout = stdout_original_stream
         $stderr = stderr_original_stream
-
       end
     end
 

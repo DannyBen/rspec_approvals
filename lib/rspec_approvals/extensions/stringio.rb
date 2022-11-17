@@ -25,4 +25,3 @@ unless StringIO.method_defined? :wait_readable
     end
   end
 end
-
