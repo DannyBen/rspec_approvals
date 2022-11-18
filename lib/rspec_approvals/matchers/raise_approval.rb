@@ -26,6 +26,10 @@ module RSpecApprovals
       def supports_block_expectations?
         true
       end
+
+      def description
+        %[raise approval "#{approval_name}"]
+      end
     end
   end
 end

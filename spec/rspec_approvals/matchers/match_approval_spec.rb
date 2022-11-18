@@ -22,6 +22,13 @@ describe Matchers::MatchApproval do
     end
   end
 
+  describe '#description' do
+    it 'returns a description' do
+      subject.matches? 'something else'
+      expect(subject.description).to eq 'match approval "something"'
+    end
+  end
+
   describe '#matches?' do
     context 'when interactive mode is enabled' do
       subject { Matchers::MatchApproval.new 'no_such_approval' }

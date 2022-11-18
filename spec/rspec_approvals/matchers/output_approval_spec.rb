@@ -9,6 +9,13 @@ describe Matchers::OutputApproval do
     end
   end
 
+  describe '#description' do
+    it 'returns a description' do
+      subject.matches? 'something else'
+      expect(subject.description).to eq 'output approval "something"'
+    end
+  end
+
   describe '#matches?' do
     context 'when interactive mode is enabled' do
       before :all do

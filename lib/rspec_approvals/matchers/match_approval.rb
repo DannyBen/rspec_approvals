@@ -9,6 +9,9 @@ module RSpecApprovals
     end
 
     class MatchApproval < Base
+      def description
+        %[match approval "#{approval_name}"]
+      end
     end
   end
 end
