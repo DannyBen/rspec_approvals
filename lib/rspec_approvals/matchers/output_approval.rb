@@ -20,6 +20,10 @@ module RSpecApprovals
         true
       end
 
+      def description
+        %[output approval "#{approval_name}"]
+      end
+
       # Adds chained matcher, to allow:
       # expect { stream }.to output_approval(file).to_stdout
       # This is the default, and only provided for completeness.
