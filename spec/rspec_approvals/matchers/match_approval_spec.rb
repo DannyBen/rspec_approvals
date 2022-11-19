@@ -1,17 +1,19 @@
 require 'spec_helper'
 
 describe Matchers::MatchApproval do
-  subject { Matchers::MatchApproval.new 'something' }
+  subject { described_class.new 'something' }
 
   describe '::match_approval' do
-    it 'works' do
-      expect('anything').to match_approval('anything')
+    let(:anything) { 'anything' }
+
+    it 'matches the output' do
+      expect(anything).to match_approval('anything')
     end
   end
 
   describe '#diffable?' do
     it 'returns true' do
-      expect(subject.diffable?).to eq true
+      expect(subject.diffable?).to be true
     end
   end
 
@@ -31,7 +33,7 @@ describe Matchers::MatchApproval do
 
   describe '#matches?' do
     context 'when interactive mode is enabled' do
-      subject { Matchers::MatchApproval.new 'no_such_approval' }
+      subject { described_class.new 'no_such_approval' }
 
       before :all do
         RSpec.configuration.interactive_approvals = true
@@ -50,7 +52,7 @@ describe Matchers::MatchApproval do
         end
 
         it 'asks for approval and creates the approval' do
-          expect_any_instance_of(ApprovalHandler).to receive(:user_response).and_return :approve
+          allow_any_instance_of(ApprovalHandler).to receive(:user_response).and_return :approve
           expect { subject.matches? 'no_such_approval' }.to output(/no_such_approval/).to_stdout
           expect(File).to exist(file)
         end

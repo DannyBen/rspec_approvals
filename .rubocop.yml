@@ -1,7 +1,46 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
 inherit_gem:
   rentacop: rentacop.yml
 
 AllCops:
   TargetRubyVersion: 2.6
   SuggestExtensions: false
+  Exclude:
+    - 'dev/**/*'
+    - 'example/**/*'
+    - 'demo/**/*'
 
+# Allow `expect_any_instance_of`
+RSpec/AnyInstance:
+  Enabled: false
+
+# Allow `before :all` and `after :all`
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+# Prefer `reeive` over `have_received` spies
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+# Allow `expect` in `before`, since it is used to verify state
+RSpec/ExpectInHook:
+  Enabled: false
+
+# Allow multiple expectations per block
+RSpec/MultipleExpectations:
+  Max: 5
+
+# Allow explicit `subject`
+RSpec/NamedSubject:
+  Enabled: false
+
+# Allow deeper nested groups
+RSpec/NestedGroups:
+  Max: 5
+
+# Allow stubbing other `subject` methods
+RSpec/SubjectStub:
+  Enabled: false

@@ -5,7 +5,7 @@ describe Matchers::Base do
 
   describe '#diffable?' do
     it 'is true' do
-      expect(subject.diffable?).to eq true
+      expect(subject.diffable?).to be true
     end
   end
 

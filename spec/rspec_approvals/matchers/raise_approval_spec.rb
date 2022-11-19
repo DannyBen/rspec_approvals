@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Matchers::RaiseApproval do
-  subject { Matchers::RaiseApproval.new 'raised' }
+  subject { described_class.new 'raised' }
 
   describe '::raise_approval' do
-    it 'works' do
+    it 'captures the raised exception' do
       expect { raise 'Something fakely went wrong' }.to raise_approval('raised')
     end
 

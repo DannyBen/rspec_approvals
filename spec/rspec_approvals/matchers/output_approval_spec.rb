@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Matchers::OutputApproval do
-  subject { Matchers::OutputApproval.new 'something' }
+  subject { described_class.new 'something' }
 
   describe '::output_approval' do
-    it 'works' do
+    it 'captures the output' do
       expect { print 'anything' }.to output_approval('anything')
     end
   end
@@ -27,7 +27,7 @@ describe Matchers::OutputApproval do
       end
 
       it 'requests user approval' do
-        expect(subject).to receive(:approve_approval).and_return true
+        allow(subject).to receive(:approve_approval).and_return true
         expect(subject.matches? proc { puts 'nothing' }).to be true
       end
     end

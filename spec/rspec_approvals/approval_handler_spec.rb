@@ -4,12 +4,13 @@ describe ApprovalHandler do
   let(:approval) { 'spec/approvals/approval_handler' }
 
   def user_response(response)
-    expect_any_instance_of(ApprovalHandler).to receive(:user_response).and_return response
+    allow_any_instance_of(ApprovalHandler).to receive(:user_response).and_return response
   end
 
   describe '#run' do
     context 'when the approval file does not exist' do
       before { FileUtils.rm_f approval }
+
       let(:base_menu_options) do
         {
           'a' => ['Approve (and save)', :approve],
@@ -18,7 +19,7 @@ describe ApprovalHandler do
       end
 
       it 'only asks the user to Approve or Reject' do
-        expect(Prompt).to receive(:select)
+        allow(Prompt).to receive(:select)
           .with('Please Choose:', 'r', base_menu_options)
           .and_return('Reject')
 
