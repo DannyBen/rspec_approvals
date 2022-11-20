@@ -21,7 +21,7 @@ RSpec/AnyInstance:
 RSpec/BeforeAfterAll:
   Enabled: false
 
-# Prefer `reeive` over `have_received` spies
+# Prefer `receive` over `have_received` spies
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
