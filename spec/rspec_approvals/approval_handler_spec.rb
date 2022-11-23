@@ -4,7 +4,7 @@ describe ApprovalHandler do
   let(:approval) { 'spec/approvals/approval_handler' }
 
   def user_response(response)
-    allow_any_instance_of(ApprovalHandler).to receive(:user_response).and_return response
+    expect_any_instance_of(ApprovalHandler).to receive(:user_response).and_return response
   end
 
   describe '#run' do
