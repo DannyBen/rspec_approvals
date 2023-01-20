@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.required_ruby_version = '>= 2.6.0'
 
-  s.add_runtime_dependency 'colsole', '~> 0.7'
+  s.add_runtime_dependency 'colsole', '~> 0.8', '>= 0.8.1'
   s.add_runtime_dependency 'diffy', '~> 3.4'
   s.add_runtime_dependency 'strings-ansi', '~> 0.2'
   s.add_runtime_dependency 'string-similarity', '~> 2.1'

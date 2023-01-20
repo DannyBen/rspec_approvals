@@ -62,18 +62,18 @@ module RSpecApprovals
     end
 
     def approve
-      say '!txtgrn!Approved'
+      say 'g`Approved`'
       File.deep_write approval_file, actual
       true
     end
 
     def reject
-      say '!txtred!Not Approved'
+      say 'r`Not Approved`'
       false
     end
 
     def separator
-      "!txtgrn!#{'_' * terminal_width}"
+      "g`#{'_' * terminal_width}`"
     end
 
     def diff

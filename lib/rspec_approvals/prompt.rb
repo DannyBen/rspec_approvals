@@ -8,16 +8,16 @@ module RSpecApprovals
 
       def select(prompt, default, options)
         options.each do |key, config|
-          color = key == default ? 'txtred' : 'txtgrn'
-          say "!#{color}!#{key}!txtrst!) #{config.first}"
+          color = key == default ? 'r' : 'g'
+          say "#{color}`#{key}`) #{config.first}"
         end
 
-        say "\n!txtblu!#{prompt}!txtrst! "
+        say "\nb`#{prompt}` "
         response = $stdin.getch.downcase
 
         response = default unless options.has_key? response
 
-        resay "!txtpur!#{options[response].first}"
+        say "m`#{options[response].first}`", replace: true
         options[response].last
       end
     end
