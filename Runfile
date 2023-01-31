@@ -1,13 +1,10 @@
-require "runfile-tasks"
-require_relative 'lib/rspec_approvals'
-require_relative 'lib/rspec_approvals/version'
+require 'rspec_approvals/version'
 
 title   "RSpec Approvals Developer Toolbelt"
 summary "Runfile tasks for building the RSpec Approvals gem"
 version RSpecApprovals::VERSION
 
-RunfileTasks::RubyGems.all 'rspec_approvals'
-RunfileTasks::Testing.rspec
+import_gem 'runfile-tasks/gem', gemname: 'rspec_approvals'
 
 help   "Run interactive console"
 action :console, :c do
