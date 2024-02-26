@@ -73,7 +73,7 @@ module RSpecApprovals
       end
 
       # Returns true if RSpec is configured to sanitize (remove ANSI escape
-      # codes) from the actual strings before proceeeding to comparing them.
+      # codes) from the actual strings before proceeding to comparing them.
       def sanitize?
         RSpec.configuration.strip_ansi_escape
       end
@@ -110,9 +110,9 @@ module RSpecApprovals
       end
 
       # Do the actual test.
-      # - If .before() was used, we foreward the actual output to the
+      # - If .before() was used, we forward the actual output to the
       #   proc for processing first.
-      # - If before_approval proc was configured, forward the acual output
+      # - If before_approval proc was configured, forward the actual output
       #   to the proc for processing.
       # - If .diff() was used, then distance will be set and then
       #   we "levenshtein it".

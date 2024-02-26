@@ -30,7 +30,7 @@ describe ApprovalHandler do
       context 'when the user answers Approve' do
         before { user_response :approve }
 
-        it 'writes actual result to approval and reutrns true' do
+        it 'writes actual result to approval and returns true' do
           supress_output do
             expect(subject.run 'expected', 'actual', approval).to be true
           end
