@@ -12,12 +12,12 @@ Gem::Specification.new do |s|
   s.files       = Dir['README.md', 'lib/**/*.*']
   s.homepage    = 'https://github.com/DannyBen/rspec_approvals'
   s.license     = 'MIT'
-  s.required_ruby_version = '>= 3.0'
+  s.required_ruby_version = '>= 3.1'
 
-  s.add_runtime_dependency 'colsole', '>= 0.8.1', '< 2'
-  s.add_runtime_dependency 'diffy', '~> 3.4'
-  s.add_runtime_dependency 'strings-ansi', '~> 0.2'
-  s.add_runtime_dependency 'string-similarity', '~> 2.1'
+  s.add_dependency 'colsole', '>= 0.8.1', '< 2'
+  s.add_dependency 'diffy', '~> 3.4'
+  s.add_dependency 'strings-ansi', '~> 0.2'
+  s.add_dependency 'string-similarity', '~> 2.1'
 
   s.metadata['rubygems_mfa_required'] = 'true'
 end
