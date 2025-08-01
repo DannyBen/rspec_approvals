@@ -1,11 +1,5 @@
 # RSpec Approvals
 
-[![Gem Version](https://badge.fury.io/rb/rspec_approvals.svg)](https://badge.fury.io/rb/rspec_approvals)
-[![Build Status](https://github.com/DannyBen/rspec_approvals/workflows/Test/badge.svg)](https://github.com/DannyBen/rspec_approvals/actions?query=workflow%3ATest)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b6ca26de93d9236c706a/maintainability)](https://codeclimate.com/github/DannyBen/rspec_approvals/maintainability)
-
----
-
 RSpec Approvals allows you to interactively review and approve testable
 content. 
 
