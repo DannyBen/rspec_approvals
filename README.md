@@ -1,5 +1,7 @@
 # RSpec Approvals
 
+![repocard](repocard.svg)
+
 RSpec Approvals allows you to interactively review and approve testable
 content. 
 

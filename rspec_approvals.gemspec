@@ -14,10 +14,15 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.required_ruby_version = '>= 3.1'
 
-  s.add_dependency 'colsole', '>= 0.8.1', '< 2'
+  s.add_dependency 'colsole', '~> 1.0'
   s.add_dependency 'diffy', '~> 3.4'
   s.add_dependency 'strings-ansi', '~> 0.2'
   s.add_dependency 'string-similarity', '~> 2.1'
 
-  s.metadata['rubygems_mfa_required'] = 'true'
+  s.metadata = {
+    'bug_tracker_uri'       => 'https://github.com/dannyben/rspec_approvals/issues',
+    'changelog_uri'         => 'https://github.com/dannyben/rspec_approvals/blob/master/CHANGELOG.md',
+    'source_code_uri'       => 'https://github.com/dannyben/rspec_approvals',
+    'rubygems_mfa_required' => 'true',
+  }
 end
