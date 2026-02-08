@@ -1,6 +1,6 @@
 # RSpec Approvals
 
-![repocard](repocard.svg)
+![repocard](https://repocard.dannyben.com/svg/rspec_approvals.svg)
 
 RSpec Approvals allows you to interactively review and approve testable
 content. 
