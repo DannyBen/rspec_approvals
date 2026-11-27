@@ -1,3 +1,5 @@
+require 'did_you_mean/levenshtein'
+
 module RSpecApprovals
   module Matchers
     # A base matcher for approvals
@@ -129,7 +131,7 @@ module RSpecApprovals
         end
 
         if distance
-          @actual_distance = String::Similarity.levenshtein_distance expected, actual
+          @actual_distance = DidYouMean::Levenshtein.distance expected, actual
           @actual_distance <= distance
         else
           actual == expected
