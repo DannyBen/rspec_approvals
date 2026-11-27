@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.1'
 
   s.add_dependency 'colsole', '~> 1.0'
+  s.add_dependency 'did_you_mean', '~> 2.0.0'
   s.add_dependency 'diffy', '~> 3.4'
   s.add_dependency 'strings-ansi', '~> 0.2'
-  s.add_dependency 'string-similarity', '~> 2.1'
 
   s.metadata = {
     'bug_tracker_uri'       => 'https://github.com/dannyben/rspec_approvals/issues',

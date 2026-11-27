@@ -1,5 +1,3 @@
-require 'string-similarity'
-
 module RSpecApprovals
   module Matchers
     # Adds the matcher to RSpec:
